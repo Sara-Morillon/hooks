@@ -3,10 +3,9 @@ import { useCallback, useEffect, useState } from 'react'
 interface IFetchedStatus {
   loading: boolean
   error?: unknown
-  refresh: () => void
 }
 
-export function useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T): [T, IFetchedStatus] {
+export function useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T): [T, IFetchedStatus, () => void] {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<T>(defaultValue)
   const [error, setError] = useState()
@@ -30,5 +29,5 @@ export function useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T): [T, IFe
     }
   }, [refresh])
 
-  return [data, { loading, error, refresh }]
+  return [data, { loading, error }, refresh]
 }
