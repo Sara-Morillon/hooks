@@ -21,6 +21,8 @@ describe('useTheme', () => {
     expect(result.current).toBe('light')
     changeMatchMedia(true)
     expect(result.current).toBe('dark')
+    changeMatchMedia(false)
+    expect(result.current).toBe('light')
   })
 
   it('should set document color scheme', () => {
@@ -30,5 +32,7 @@ describe('useTheme', () => {
     expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('color-scheme', 'light')
     changeMatchMedia(true)
     expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('color-scheme', 'dark')
+    changeMatchMedia(false)
+    expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('color-scheme', 'light')
   })
 })

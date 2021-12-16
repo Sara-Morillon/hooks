@@ -1,35 +1,17 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 
 export type State<S> = [S, Dispatch<SetStateAction<S>>]
 
 export function useText(input = ''): State<string> {
-  const [value, setValue] = useState(input)
-
-  useEffect(() => {
-    if (input) setValue(input)
-  }, [input])
-
-  return [value, setValue]
+  return useSelect(input)
 }
 
 export function useBoolean(input = false): State<boolean> {
-  const [value, setValue] = useState(input)
-
-  useEffect(() => {
-    if (input) setValue(input)
-  }, [input])
-
-  return [value, setValue]
+  return useSelect(input)
 }
 
 export function useNumber(input = 0): State<number> {
-  const [value, setValue] = useState(input)
-
-  useEffect(() => {
-    if (input) setValue(input)
-  }, [input])
-
-  return [value, setValue]
+  return useSelect(input)
 }
 
 export function useSelect<T>(input: T): State<T> {
@@ -42,12 +24,31 @@ export function useSelect<T>(input: T): State<T> {
   return [value, setValue]
 }
 
-export function useMultiSelect<T>(input: T[] = []): State<T[]> {
-  const [value, setValue] = useState(input)
+export type MultiSelectState<T> = [...State<T[]>, (value: T) => void, (value: T) => void, (value: T) => void]
 
-  useEffect(() => {
-    if (input) setValue(input)
-  }, [input])
+export function useMultiSelect<T>(input: T[] = []): MultiSelectState<T> {
+  const [values, setValues] = useSelect(input)
 
-  return [value, setValue]
+  const addValue = useCallback(
+    (value: T) => {
+      setValues((values) => [...values, value])
+    },
+    [setValues]
+  )
+
+  const removeValue = useCallback(
+    (value: T) => {
+      setValues((values) => values.filter((v) => v !== value))
+    },
+    [setValues]
+  )
+
+  const toggleValue = useCallback(
+    (value: T) => {
+      setValues((values) => (values.includes(value) ? values.filter((v) => v !== value) : [...values, value]))
+    },
+    [setValues]
+  )
+
+  return [values, setValues, addValue, removeValue, toggleValue]
 }

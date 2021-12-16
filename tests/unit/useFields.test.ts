@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks'
-import { State, useBoolean, useMultiSelect, useNumber, useSelect, useText } from '../../src/useFields'
+import { MultiSelectState, State, useBoolean, useMultiSelect, useNumber, useSelect, useText } from '../../src/useFields'
 
 describe('useText', () => {
   it('should use empty string as default value', () => {
@@ -88,12 +88,6 @@ describe('useNumber', () => {
 describe('useSelect', () => {
   type T = { prop?: string }
 
-  it('should use empty string as default value', () => {
-    const initialProps: T = {}
-    const { result } = renderHook<T, State<T>>((props) => useSelect(props), { initialProps })
-    expect(result.current[0]).toEqual({})
-  })
-
   it('should use input as default value', () => {
     const initialProps: T = { prop: 'value' }
     const { result } = renderHook<T, State<T>>((props) => useSelect(props), { initialProps })
@@ -120,34 +114,70 @@ describe('useSelect', () => {
 })
 
 describe('useMultiSelect', () => {
-  type T = { prop?: string }[]
+  type T = { prop?: string }
 
-  it('should use empty string as default value', () => {
-    const initialProps: T = []
-    const { result } = renderHook<T, State<T>>((props) => useMultiSelect(props), { initialProps })
+  it('should use empty array as default value', () => {
+    const initialProps: T[] | undefined = undefined
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
     expect(result.current[0]).toEqual([])
   })
 
   it('should use input as default value', () => {
-    const initialProps: T = [{ prop: 'value' }]
-    const { result } = renderHook<T, State<T>>((props) => useMultiSelect(props), { initialProps })
+    const initialProps: T[] = [{ prop: 'value' }]
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
     expect(result.current[0]).toEqual([{ prop: 'value' }])
   })
 
   it('should update value when input changes', () => {
-    const initialProps: T = []
-    const { result, rerender } = renderHook<T, State<T>>((props) => useMultiSelect(props), { initialProps })
+    const initialProps: T[] = []
+    const { result, rerender } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), {
+      initialProps,
+    })
     expect(result.current[0]).toEqual([])
     rerender([{ prop: 'value' }])
     expect(result.current[0]).toEqual([{ prop: 'value' }])
   })
 
-  it('should change value', () => {
-    const initialProps: T = []
-    const { result } = renderHook<T, State<T>>((props) => useMultiSelect(props), { initialProps })
+  it('should set values', () => {
+    const initialProps: T[] = []
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
     expect(result.current[0]).toEqual([])
     act(() => {
       result.current[1]([{ prop: 'value' }])
+    })
+    expect(result.current[0]).toEqual([{ prop: 'value' }])
+  })
+
+  it('should add value', () => {
+    const initialProps: T[] = []
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    expect(result.current[0]).toEqual([])
+    act(() => {
+      result.current[2]({ prop: 'value' })
+    })
+    expect(result.current[0]).toEqual([{ prop: 'value' }])
+  })
+
+  it('should remove value', () => {
+    const initialProps: T[] = [{ prop: 'value' }]
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    expect(result.current[0]).toEqual([{ prop: 'value' }])
+    act(() => {
+      result.current[3](initialProps[0])
+    })
+    expect(result.current[0]).toEqual([])
+  })
+
+  it('should toggle value', () => {
+    const initialProps: T[] = [{ prop: 'value' }]
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    expect(result.current[0]).toEqual([{ prop: 'value' }])
+    act(() => {
+      result.current[4](initialProps[0])
+    })
+    expect(result.current[0]).toEqual([])
+    act(() => {
+      result.current[4]({ prop: 'value' })
     })
     expect(result.current[0]).toEqual([{ prop: 'value' }])
   })
