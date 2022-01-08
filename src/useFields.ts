@@ -2,19 +2,19 @@ import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'reac
 
 export type State<S> = [S, Dispatch<SetStateAction<S>>]
 
-export function useText(input = ''): State<string> {
-  return useSelect(input)
+export function useTextField(input = ''): State<string> {
+  return useSelectField(input)
 }
 
-export function useBoolean(input = false): State<boolean> {
-  return useSelect(input)
+export function useBooleanField(input = false): State<boolean> {
+  return useSelectField(input)
 }
 
-export function useNumber(input = 0): State<number> {
-  return useSelect(input)
+export function useNumberField(input = 0): State<number> {
+  return useSelectField(input)
 }
 
-export function useSelect<T>(input: T): State<T> {
+export function useSelectField<T>(input: T): State<T> {
   const [value, setValue] = useState(input)
 
   useEffect(() => {
@@ -26,8 +26,8 @@ export function useSelect<T>(input: T): State<T> {
 
 export type MultiSelectState<T> = [...State<T[]>, (value: T) => void, (value: T) => void, (value: T) => void]
 
-export function useMultiSelect<T>(input: T[] = []): MultiSelectState<T> {
-  const [values, setValues] = useSelect(input)
+export function useMultiSelectField<T>(input: T[] = []): MultiSelectState<T> {
+  const [values, setValues] = useSelectField(input)
 
   const addValue = useCallback(
     (value: T) => {

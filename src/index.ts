@@ -1,5 +1,5 @@
 export * from './useCopy'
 export * from './useFetch'
-export * as fields from './useFields'
+export * from './useFields'
 export * from './usePagination'
 export * from './useTheme'
