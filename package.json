@@ -1,6 +1,6 @@
 {
   "name": "@saramorillon/hooks",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "author": "Sara Morillon",
   "description": "Some utility hooks",
   "main": "dist/index.js",
