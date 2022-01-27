@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface IFetchedStatus {
   loading: boolean
@@ -29,5 +29,5 @@ export function useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T): [T, IFe
     }
   }, [refresh])
 
-  return [data, { loading, error }, refresh]
+  return useMemo(() => [data, { loading, error }, refresh], [data, loading, error, refresh])
 }

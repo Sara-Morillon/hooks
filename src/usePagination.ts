@@ -43,5 +43,8 @@ export function usePagination(): IPagination {
   const canPrevious = useMemo(() => page > 1, [page])
   const canNext = useMemo(() => page < maxPage, [page, maxPage])
 
-  return { page, maxPage, setMaxPage, goTo, first, previous, next, last, canPrevious, canNext }
+  return useMemo(
+    () => ({ page, maxPage, setMaxPage, goTo, first, previous, next, last, canPrevious, canNext }),
+    [page, maxPage, setMaxPage, goTo, first, previous, next, last, canPrevious, canNext]
+  )
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface ICopyStatus {
   loading: boolean
@@ -26,5 +26,5 @@ export function useCopy(): [boolean, ICopyStatus, (data: string) => void] {
     })
   }, [])
 
-  return [authorized, { loading, error }, copy]
+  return useMemo(() => [authorized, { loading, error }, copy], [authorized, loading, error, copy])
 }
