@@ -17,6 +17,7 @@ export function useForm<T = never>(onSave: (values: T) => void, initialValues: T
   const onSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault()
+      e.stopPropagation()
       onSave(values)
     },
     [onSave, values]
