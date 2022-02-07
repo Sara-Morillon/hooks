@@ -29,7 +29,7 @@ describe('useForm', () => {
   it('should save values when submitting form and values are defined', () => {
     const onSave = jest.fn()
     const { result } = renderHook(() => useForm(onSave, { prop: 'value' }))
-    act(() => result.current.onSubmit(mockFormEvent()))
+    act(() => result.current.onSubmit())
     expect(onSave).toHaveBeenCalledWith({ prop: 'value' })
   })
 

@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useMemo, useState } from 'react'
 
 export interface IForm<T = never> {
-  onSubmit(e: FormEvent): void
+  onSubmit(e?: FormEvent): void
   values: T
   onChange<K extends keyof T>(name: K, value: T[K]): void
   reset(): void
@@ -15,9 +15,9 @@ export function useForm<T = never>(onSave: (values: T) => void, initialValues: T
   }, [])
 
   const onSubmit = useCallback(
-    (e: FormEvent) => {
-      e.preventDefault()
-      e.stopPropagation()
+    (e?: FormEvent) => {
+      e?.preventDefault()
+      e?.stopPropagation()
       onSave(values)
     },
     [onSave, values]
