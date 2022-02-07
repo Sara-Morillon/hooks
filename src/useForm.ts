@@ -2,7 +2,7 @@ import { FormEvent, useCallback, useMemo, useState } from 'react'
 
 export interface IForm<T = never> {
   onSubmit(e: FormEvent): void
-  values?: T
+  values: T
   onChange<K extends keyof T>(name: K, value: T[K]): void
   reset(): void
 }
