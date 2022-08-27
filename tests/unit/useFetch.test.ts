@@ -21,6 +21,19 @@ describe('useFetch', () => {
     expect(result.current[1].error).toBeUndefined()
   })
 
+  it('should fetch data', async () => {
+    const fetchFn = jest.fn().mockResolvedValue('result')
+    const { waitForNextUpdate } = renderHook(() => useFetch(fetchFn, 'default'))
+    await waitForNextUpdate()
+    expect(fetchFn).toHaveBeenCalled()
+  })
+
+  it('should not fetch data if auto fetch is disabled', () => {
+    const fetchFn = jest.fn().mockResolvedValue('result')
+    renderHook(() => useFetch(fetchFn, 'default', false))
+    expect(fetchFn).not.toHaveBeenCalled()
+  })
+
   it('should use value returned by fetch', async () => {
     const fetchFn = jest.fn().mockResolvedValue('result')
     const { result, waitForNextUpdate } = renderHook(() => useFetch(fetchFn, 'default'))

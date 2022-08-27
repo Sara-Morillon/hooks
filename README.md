@@ -72,7 +72,7 @@ function MyComponent() {
 ## API
 
 ```typescript
-useFetch<T>(fetchFn: () => Promise<T>, defaultValue?: T): [T, IFetchedStatus, () => void, React.Dispatch<React.SetStateAction<T>>]
+useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T, autoFetch: boolean): [T, IFetchedStatus, () => void, React.Dispatch<React.SetStateAction<T>>]
 ```
 
 ### Arguments
@@ -80,6 +80,8 @@ useFetch<T>(fetchFn: () => Promise<T>, defaultValue?: T): [T, IFetchedStatus, ()
 `fetchFn: () => Promise<T>` - The action to run. **/!\ Must be memoized to avoid potential infinite loops.**
 
 `defaultValue: T` - The default value to return.
+
+`autoFetch: boolean` - Weither the fetch function should be run on mount or not. Default is `true`.
 
 ### Returns
 

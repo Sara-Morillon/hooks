@@ -7,14 +7,15 @@ interface IFetchedStatus {
 
 export function useFetch<T>(
   fetchFn: () => Promise<T>,
-  defaultValue: T
+  defaultValue: T,
+  autoFetch = true
 ): [T, IFetchedStatus, () => void, Dispatch<SetStateAction<T>>] {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<T>(defaultValue)
   const [error, setError] = useState()
   const [mounted, setMounted] = useState(false)
 
-  const replay = useCallback(() => {
+  const fetch = useCallback(() => {
     if (mounted) {
       setLoading(true)
       fetchFn()
@@ -26,11 +27,11 @@ export function useFetch<T>(
 
   useEffect(() => {
     setMounted(true)
-    replay()
+    if (autoFetch) fetch()
     return () => {
       setMounted(false)
     }
-  }, [replay])
+  }, [autoFetch, fetch])
 
-  return useMemo(() => [data, { loading, error }, replay, setData], [data, loading, error, replay])
+  return useMemo(() => [data, { loading, error }, fetch, setData], [data, loading, error, fetch])
 }
