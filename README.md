@@ -175,13 +175,13 @@ type Data {
 }
 
 function MyComponent({ data }: { data: Data }) {
-  const onSave = useCallback((values: Data) => {
+  const save = useCallback((values: Data) => {
     console.log(values)
   }, [])
-  const { values, onSubmit, onChange, onReset } = useForm(onSave, data)
+  const { values, submit, onChange, reset } = useForm(save, data)
 
   return (
-    <form onSubmit={onSubmit} onReset={onReset}>
+    <form onSubmit={submit} onReset={reset}>
       <input value={values.name} onChange={(e) => onChange('name', e.target.value)} />
       <button type='submit'>Submit</button>
       <button type='reset'>Reset</button>
@@ -198,7 +198,7 @@ useForm<T>(props: IFormProps<T>): IForm<T>
 
 ### Arguments
 
-`onSave: (values: T) => void` - The save action. **/!\ Must be memoized to avoid potential infinite loops.**
+`save: (values: T) => void` - The save action. **/!\ Must be memoized to avoid potential infinite loops.**
 
 `initialValues: T` - The initial values.
 
@@ -207,9 +207,11 @@ useForm<T>(props: IFormProps<T>): IForm<T>
 An object containing:
 
 - `values: T` - the form values
-- `onSubmit: (e: FormEvent) => void` - a function for submitting a form
 - `onChange: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form
-- `onReset: () => void` - a function to reset the form to its initial values
+- `submit: (e: FormEvent) => void` - a function for submitting a form
+- `reset: () => void` - a function to reset the form to its initial values
+- `loading: boolean` - indicates when the form is being submitted
+- `error?: unknown` - contains a potential error thrown by the save function
 
 # useCopy
 
