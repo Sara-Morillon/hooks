@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 import { DragEvent } from 'react'
 import { useDrag, useDrop } from '../../src/useDnd'
 

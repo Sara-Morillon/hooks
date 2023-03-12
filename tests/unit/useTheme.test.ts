@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useTheme } from '../../src/useTheme'
 import { changeMatchMedia, mockMatchMedia } from '../mock'
 

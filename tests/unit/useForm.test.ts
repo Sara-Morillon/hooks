@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 import { FormEvent } from 'react'
 import { useForm } from '../../src/useForm'
 import { flushPromises } from '../mock'
