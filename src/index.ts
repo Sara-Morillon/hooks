@@ -1,4 +1,5 @@
 export * from './useCopy'
+export * from './useDebounce'
 export * from './useDnd'
 export * from './useFetch'
 export * from './useForm'
