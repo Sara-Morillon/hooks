@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react'
-import { useDebounce } from '../../src'
+import { useDebounce } from '../../src/useDebounce'
 
 describe('useDebounce', () => {
   beforeEach(() => {

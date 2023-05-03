@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { useDialog } from '../../src'
+import { useDialog } from '../../src/useDialog'
 
 describe('useDialog', () => {
   it('should return dialog ref', () => {

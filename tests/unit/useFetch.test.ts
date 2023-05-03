@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { useFetch } from '../../src'
+import { useFetch } from '../../src/useFetch'
 import { flushPromises, mockPromiseChain } from '../mock'
 
 describe('useFetch', () => {
