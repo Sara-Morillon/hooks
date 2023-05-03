@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { useFetch } from '../../src/useFetch'
+import { useFetch } from '../../src'
 import { flushPromises, mockPromiseChain } from '../mock'
 
 describe('useFetch', () => {
@@ -7,6 +7,12 @@ describe('useFetch', () => {
     const fetchFn = mockPromiseChain()
     const { result } = renderHook(() => useFetch(fetchFn, 'default'))
     expect(result.current[0]).toBe('default')
+  })
+
+  it('should not be loading by default if auto fetch is false', () => {
+    const fetchFn = mockPromiseChain()
+    const { result } = renderHook(() => useFetch(fetchFn, '', false))
+    expect(result.current[1].loading).toBe(false)
   })
 
   it('should be loading by default', () => {

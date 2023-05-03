@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react'
 import { FormEvent } from 'react'
-import { useForm } from '../../src/useForm'
+import { useForm } from '../../src'
 import { flushPromises } from '../mock'
 
 function mockFormEvent() {

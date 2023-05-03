@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { useCopy } from '../../src/useCopy'
+import { useCopy } from '../../src'
 import { flushPromises } from '../mock'
 
 describe('useCopy', () => {

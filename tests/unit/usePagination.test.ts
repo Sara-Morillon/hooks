@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { usePagination } from '../../src/usePagination'
+import { usePagination } from '../../src'
 
 describe('page', () => {
   it('should return page 1 by default', () => {

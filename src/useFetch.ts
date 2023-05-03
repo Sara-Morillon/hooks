@@ -10,7 +10,7 @@ export function useFetch<T>(
   defaultValue: T,
   autoFetch = true
 ): [T, IFetchedStatus, () => void, Dispatch<SetStateAction<T>>] {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(autoFetch)
   const [data, setData] = useState<T>(defaultValue)
   const [error, setError] = useState()
   const [mounted, setMounted] = useState(false)
