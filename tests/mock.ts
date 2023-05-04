@@ -43,6 +43,6 @@ export function mockPromiseChain() {
   })
 }
 
-export async function flushPromises() {
-  await act(async () => new Promise((resolve) => setTimeout(resolve, 0)))
+export function flushPromises() {
+  return act(() => new Promise((resolve) => setTimeout(resolve, 0)))
 }

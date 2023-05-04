@@ -44,7 +44,8 @@ describe('useCopy', () => {
   it('should execute copy', async () => {
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    await act(async () => result.current[2]('data'))
+    act(() => result.current[2]('data'))
+    await flushPromises()
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('data')
   })
 
@@ -52,7 +53,8 @@ describe('useCopy', () => {
     jest.spyOn(navigator.clipboard, 'writeText').mockRejectedValue(new Error())
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    await act(async () => result.current[2]('data'))
+    act(() => result.current[2]('data'))
+    await flushPromises()
     expect(result.current[1].error).toEqual(new Error())
   })
 })
