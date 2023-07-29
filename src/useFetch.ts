@@ -5,6 +5,9 @@ interface IFetchedStatus {
   error?: unknown
 }
 
+/**
+ * @deprecated Since version 2.10.0. Will be deleted in version 3.0. Use `useQuery` instead.
+ */
 export function useFetch<T>(
   fetchFn: () => Promise<T>,
   defaultValue: T,
