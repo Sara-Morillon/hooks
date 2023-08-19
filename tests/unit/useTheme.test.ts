@@ -26,7 +26,7 @@ describe('useTheme', () => {
   })
 
   it('should set document color scheme', () => {
-    jest.spyOn(document.documentElement.style, 'setProperty')
+    vi.spyOn(document.documentElement.style, 'setProperty')
     mockMatchMedia(false)
     renderHook(() => useTheme())
     expect(document.documentElement.style.setProperty).toHaveBeenCalledWith('color-scheme', 'light')
