@@ -3,7 +3,7 @@ import { useDebounce } from '../../src/useDebounce'
 
 describe('useDebounce', () => {
   beforeEach(() => {
-    vi.spyOn(global, 'setTimeout').mockImplementation()
+    vi.spyOn(global, 'setTimeout').mockReturnValue(undefined as never)
   })
 
   it('should return initial value', () => {
