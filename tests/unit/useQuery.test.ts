@@ -15,7 +15,13 @@ describe('useQuery', () => {
     expect(result.current.error).toBeUndefined()
   })
 
-  it('should fetch data when executing query', async () => {
+  it('should automatically execute query if autoRun is true', () => {
+    const queryFn = vi.fn().mockResolvedValue('result')
+    renderHook(() => useQuery(queryFn, { autoRun: true }))
+    expect(queryFn).toHaveBeenCalled()
+  })
+
+  it('should run callback when executing query', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useQuery(queryFn))
     await act(() => result.current.execute())
@@ -23,7 +29,7 @@ describe('useQuery', () => {
   })
 
   // Waiting for this issue to be fixed: https://github.com/testing-library/react-hooks-testing-library/issues/847
-  it.skip('should not fetch data when executing query after unmount', async () => {
+  it.skip('should not run callback when executing query after unmount', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result, unmount } = renderHook(() => useQuery(queryFn))
     unmount()
