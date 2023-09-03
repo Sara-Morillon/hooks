@@ -15,7 +15,7 @@ interface IQueryResult<T> {
 export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T> & { defaultValue: T }): IQueryResult<T>
 export function useQuery<T>(queryFn: () => Promise<T>, options?: IQueryOptions<T>): IQueryResult<T | undefined>
 export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T> = {}): IQueryResult<T | undefined> {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(options.autoRun || false)
   const [result, setResult] = useState<T | undefined>(options.defaultValue)
   const [error, setError] = useState<unknown>()
   const [mounted, setMounted] = useState(false)
@@ -31,7 +31,6 @@ export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T>
     if (mounted) {
       setLoading(true)
       setError(undefined)
-      setResult(options.defaultValue)
       return queryFn()
         .then((data) => {
           if (mounted) setResult(data)
