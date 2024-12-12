@@ -1,12 +1,13 @@
 {
   "include": ["src", "tests", "vitest.config.ts"],
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
     "outDir": "dist",
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
     "declaration": true,
     "sourceMap": true,
-    "strict": true,
     "types": ["vitest/globals"]
   }
 }

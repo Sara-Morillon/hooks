@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react'
-import { useCopy } from '../../src/useCopy'
-import { flushPromises } from '../mock'
+import { useCopy } from '../../src/useCopy.js'
+import { flushPromises } from '../mock.js'
 
 describe('useCopy', () => {
   beforeAll(() => {
