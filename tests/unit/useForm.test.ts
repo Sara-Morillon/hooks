@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react'
-import { FormEvent } from 'react'
-import { useForm } from '../../src/useForm'
-import { flushPromises } from '../mock'
+import type { FormEvent } from 'react'
+import { useForm } from '../../src/useForm.js'
+import { flushPromises } from '../mock.js'
 
 function mockFormEvent() {
   return { preventDefault: vi.fn(), stopPropagation: vi.fn() } as unknown as FormEvent

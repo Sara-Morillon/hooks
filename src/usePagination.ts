@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
+import { type Dispatch, type SetStateAction, useCallback, useMemo, useState } from 'react'
 
 export interface IPagination {
   page: number
@@ -18,7 +18,7 @@ export function usePagination(maxPage: number, initialPage = 1): IPagination {
     (action: number | ((page: number) => number)) => {
       setPage((page) => Math.max(1, Math.min(typeof action === 'number' ? action : action(page), maxPage)))
     },
-    [maxPage]
+    [maxPage],
   )
 
   const first = useCallback(() => {
@@ -42,6 +42,6 @@ export function usePagination(maxPage: number, initialPage = 1): IPagination {
 
   return useMemo(
     () => ({ page, goTo, first, previous, next, last, canPrevious, canNext }),
-    [page, goTo, first, previous, next, last, canPrevious, canNext]
+    [page, goTo, first, previous, next, last, canPrevious, canNext],
   )
 }

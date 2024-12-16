@@ -5,35 +5,34 @@
   "description": "Some utility hooks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "prepublish": "yarn build",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint \"{src,tests}/**/*.ts\"",
     "format": "prettier --write \"{src,tests}/**/*.ts\""
   },
-  "files": [
-    "dist/*"
-  ],
+  "files": ["dist/*"],
   "repository": {
     "type": "git",
     "url": "git@github.com:saramorillon/hooks.git"
   },
   "license": "MIT",
   "devDependencies": {
-    "@saramorillon/eslint-plugin": "^3.0.0",
-    "@testing-library/dom": "^9.3.1",
-    "@testing-library/react": "^14.0.0",
-    "@types/react": "^18.2.20",
-    "@vitest/coverage-v8": "^0.34.2",
-    "jsdom": "^22.1.0",
-    "prettier": "^3.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.1.6",
-    "vitest": "^0.34.2"
+    "@biomejs/biome": "^1.9.4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.2",
+    "@types/react": "18",
+    "@vitest/coverage-v8": "^2.1.8",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.4.2",
+    "react": "18",
+    "react-dom": "18",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   },
   "peerDependencies": {
-    "react": ">=17.0.2"
-  },
-  "dependencies": {}
+    "react": ">=18"
+  }
 }

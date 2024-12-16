@@ -25,7 +25,7 @@ export function useCopy(): [boolean, ICopyStatus, (data: string) => void] {
       setAuthorized(true)
     } else {
       void navigator.permissions.query({ name: 'clipboard-write' as PermissionName }).then((result) => {
-        setAuthorized(result.state == 'granted' || result.state == 'prompt')
+        setAuthorized(result.state === 'granted' || result.state === 'prompt')
       })
     }
   }, [])

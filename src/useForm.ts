@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useMemo, useState } from 'react'
+import { type FormEvent, useCallback, useMemo, useState } from 'react'
 
 export interface IForm<T = never> {
   values: T
@@ -29,7 +29,7 @@ export function useForm<T = never>(save: (values: T) => void | Promise<void>, in
         .catch(setError)
         .finally(() => setLoading(false))
     },
-    [save, values]
+    [save, values],
   )
 
   const reset = useCallback(() => {
@@ -38,6 +38,6 @@ export function useForm<T = never>(save: (values: T) => void | Promise<void>, in
 
   return useMemo(
     () => ({ values, onChange, submit, reset, loading, error }),
-    [values, onChange, submit, reset, loading, error]
+    [values, onChange, submit, reset, loading, error],
   )
 }

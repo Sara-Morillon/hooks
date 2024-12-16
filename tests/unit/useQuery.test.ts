@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react'
-import { useQuery } from '../../src/useQuery'
-import { flushPromises } from '../mock'
+import { useQuery } from '../../src/useQuery.js'
+import { flushPromises } from '../mock.js'
 
 describe('useQuery', () => {
   it('should not be loading by default', () => {
