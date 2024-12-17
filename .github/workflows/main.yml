@@ -14,7 +14,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@saramorillon'
       - run: yarn
-      - run: yarn jest --ci --runInBand --coverage
+      - run: yarn vitest run
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

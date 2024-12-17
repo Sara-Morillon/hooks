@@ -1,12 +1,12 @@
 {
-  "include": ["src", "tests"],
+  "include": ["src", "tests", "vitest.config.ts"],
   "compilerOptions": {
-    "outDir": "dist",
     "target": "es6",
     "module": "commonjs",
+    "outDir": "dist",
     "declaration": true,
     "sourceMap": true,
     "strict": true,
-    "esModuleInterop": true
+    "types": ["vitest/globals"]
   }
 }

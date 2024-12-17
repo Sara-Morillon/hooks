@@ -20,7 +20,7 @@ const matchMediaMock = new MatchMediaMock(false)
 export function mockMatchMedia(matches: boolean) {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(() => {
+    value: vi.fn().mockImplementation(() => {
       matchMediaMock.matches = matches
       return matchMediaMock
     }),
@@ -34,10 +34,10 @@ export function changeMatchMedia(matches: boolean) {
 }
 
 export function mockPromiseChain() {
-  return jest.fn().mockReturnValue({
-    then: jest.fn().mockReturnValue({
-      catch: jest.fn().mockReturnValue({
-        finally: jest.fn(),
+  return vi.fn().mockReturnValue({
+    then: vi.fn().mockReturnValue({
+      catch: vi.fn().mockReturnValue({
+        finally: vi.fn(),
       }),
     }),
   })

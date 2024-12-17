@@ -3,7 +3,7 @@ import { useDebounce } from '../../src/useDebounce'
 
 describe('useDebounce', () => {
   beforeEach(() => {
-    jest.spyOn(global, 'setTimeout').mockImplementation()
+    vi.spyOn(global, 'setTimeout').mockImplementation()
   })
 
   it('should return initial value', () => {
@@ -19,7 +19,7 @@ describe('useDebounce', () => {
   })
 
   it('should return new value if timeout was reached', () => {
-    jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn() as never)
+    vi.spyOn(global, 'setTimeout').mockImplementation((fn) => fn() as never)
     const { result, rerender } = renderHook((props) => useDebounce(props), { initialProps: 'value' })
     expect(result.current).toBe('value')
     rerender('value2')
