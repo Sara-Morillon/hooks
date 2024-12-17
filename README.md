@@ -138,11 +138,12 @@ return (
 ## API
 
 ```typescript
-usePagination(initialValue = 1): IPagination
+usePagination(maxPage: number, initialValue = 1): IPagination
 ```
 
 ### Arguments
 
+`maxPage: number` - The maximum page
 `initialValue?: number` - The initial page (default 1).
 
 ### Returns
@@ -150,8 +151,6 @@ usePagination(initialValue = 1): IPagination
 An object containing:
 
 - `page: number` - the current page
-- `maxPage: number` - the max page
-- `setMaxPage: React.Dispatch<React.SetStateAction<number>>` - a function to change the max page
 - `goTo: React.Dispatch<React.SetStateAction<number>>` - a function to go to a specific page
 - `first: () => void` - a function to go to the first page
 - `previous: () => void` - a function to go to the previous page
