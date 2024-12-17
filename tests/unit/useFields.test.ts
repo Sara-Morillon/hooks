@@ -1,26 +1,34 @@
 import { act, renderHook } from '@testing-library/react-hooks'
-import { MultiSelectState, State, useBoolean, useMultiSelect, useNumber, useSelect, useText } from '../../src/useFields'
+import {
+  MultiSelectState,
+  State,
+  useBooleanField,
+  useMultiSelectField,
+  useNumberField,
+  useSelectField,
+  useTextField,
+} from '../../src/useFields'
 
-describe('useText', () => {
+describe('useTextField', () => {
   it('should use empty string as default value', () => {
-    const { result } = renderHook(() => useText())
+    const { result } = renderHook(() => useTextField())
     expect(result.current[0]).toBe('')
   })
 
   it('should use input as default value', () => {
-    const { result } = renderHook(() => useText('input'))
+    const { result } = renderHook(() => useTextField('input'))
     expect(result.current[0]).toBe('input')
   })
 
   it('should update value when input changes', () => {
-    const { result, rerender } = renderHook((props?: string) => useText(props), { initialProps: undefined })
+    const { result, rerender } = renderHook((props?: string) => useTextField(props), { initialProps: undefined })
     expect(result.current[0]).toBe('')
     rerender('changed value')
     expect(result.current[0]).toBe('changed value')
   })
 
   it('should change value', () => {
-    const { result } = renderHook(() => useText())
+    const { result } = renderHook(() => useTextField())
     expect(result.current[0]).toBe('')
     act(() => {
       result.current[1]('set value')
@@ -29,26 +37,26 @@ describe('useText', () => {
   })
 })
 
-describe('useBoolean', () => {
+describe('useBooleanField', () => {
   it('should use empty string as default value', () => {
-    const { result } = renderHook(() => useBoolean())
+    const { result } = renderHook(() => useBooleanField())
     expect(result.current[0]).toBe(false)
   })
 
   it('should use input as default value', () => {
-    const { result } = renderHook(() => useBoolean(true))
+    const { result } = renderHook(() => useBooleanField(true))
     expect(result.current[0]).toBe(true)
   })
 
   it('should update value when input changes', () => {
-    const { result, rerender } = renderHook((props?: boolean) => useBoolean(props), { initialProps: undefined })
+    const { result, rerender } = renderHook((props?: boolean) => useBooleanField(props), { initialProps: undefined })
     expect(result.current[0]).toBe(false)
     rerender(true)
     expect(result.current[0]).toBe(true)
   })
 
   it('should change value', () => {
-    const { result } = renderHook(() => useBoolean())
+    const { result } = renderHook(() => useBooleanField())
     expect(result.current[0]).toBe(false)
     act(() => {
       result.current[1](true)
@@ -57,26 +65,26 @@ describe('useBoolean', () => {
   })
 })
 
-describe('useNumber', () => {
+describe('useNumberField', () => {
   it('should use empty string as default value', () => {
-    const { result } = renderHook(() => useNumber())
+    const { result } = renderHook(() => useNumberField())
     expect(result.current[0]).toBe(0)
   })
 
   it('should use input as default value', () => {
-    const { result } = renderHook(() => useNumber(1))
+    const { result } = renderHook(() => useNumberField(1))
     expect(result.current[0]).toBe(1)
   })
 
   it('should update value when input changes', () => {
-    const { result, rerender } = renderHook((props?: number) => useNumber(props), { initialProps: undefined })
+    const { result, rerender } = renderHook((props?: number) => useNumberField(props), { initialProps: undefined })
     expect(result.current[0]).toBe(0)
     rerender(2)
     expect(result.current[0]).toBe(2)
   })
 
   it('should change value', () => {
-    const { result } = renderHook(() => useNumber())
+    const { result } = renderHook(() => useNumberField())
     expect(result.current[0]).toBe(0)
     act(() => {
       result.current[1](3)
@@ -85,18 +93,18 @@ describe('useNumber', () => {
   })
 })
 
-describe('useSelect', () => {
+describe('useSelectField', () => {
   type T = { prop?: string }
 
   it('should use input as default value', () => {
     const initialProps: T = { prop: 'value' }
-    const { result } = renderHook<T, State<T>>((props) => useSelect(props), { initialProps })
+    const { result } = renderHook<T, State<T>>((props) => useSelectField(props), { initialProps })
     expect(result.current[0]).toEqual({ prop: 'value' })
   })
 
   it('should update value when input changes', () => {
     const initialProps: T = {}
-    const { result, rerender } = renderHook<T, State<T>>((props) => useSelect(props), { initialProps })
+    const { result, rerender } = renderHook<T, State<T>>((props) => useSelectField(props), { initialProps })
     expect(result.current[0]).toEqual({})
     rerender({ prop: 'value' })
     expect(result.current[0]).toEqual({ prop: 'value' })
@@ -104,7 +112,7 @@ describe('useSelect', () => {
 
   it('should change value', () => {
     const initialProps: T = {}
-    const { result } = renderHook<T, State<T>>((props) => useSelect(props), { initialProps })
+    const { result } = renderHook<T, State<T>>((props) => useSelectField(props), { initialProps })
     expect(result.current[0]).toEqual({})
     act(() => {
       result.current[1]({ prop: 'value' })
@@ -113,24 +121,24 @@ describe('useSelect', () => {
   })
 })
 
-describe('useMultiSelect', () => {
+describe('useMultiSelectField', () => {
   type T = { prop?: string }
 
   it('should use empty array as default value', () => {
     const initialProps: T[] | undefined = undefined
-    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), { initialProps })
     expect(result.current[0]).toEqual([])
   })
 
   it('should use input as default value', () => {
     const initialProps: T[] = [{ prop: 'value' }]
-    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), { initialProps })
     expect(result.current[0]).toEqual([{ prop: 'value' }])
   })
 
   it('should update value when input changes', () => {
     const initialProps: T[] = []
-    const { result, rerender } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), {
+    const { result, rerender } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), {
       initialProps,
     })
     expect(result.current[0]).toEqual([])
@@ -140,7 +148,7 @@ describe('useMultiSelect', () => {
 
   it('should set values', () => {
     const initialProps: T[] = []
-    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), { initialProps })
     expect(result.current[0]).toEqual([])
     act(() => {
       result.current[1]([{ prop: 'value' }])
@@ -150,7 +158,7 @@ describe('useMultiSelect', () => {
 
   it('should add value', () => {
     const initialProps: T[] = []
-    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), { initialProps })
     expect(result.current[0]).toEqual([])
     act(() => {
       result.current[2]({ prop: 'value' })
@@ -160,7 +168,7 @@ describe('useMultiSelect', () => {
 
   it('should remove value', () => {
     const initialProps: T[] = [{ prop: 'value' }]
-    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), { initialProps })
     expect(result.current[0]).toEqual([{ prop: 'value' }])
     act(() => {
       result.current[3](initialProps[0])
@@ -170,7 +178,7 @@ describe('useMultiSelect', () => {
 
   it('should toggle value', () => {
     const initialProps: T[] = [{ prop: 'value' }]
-    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelect(props), { initialProps })
+    const { result } = renderHook<T[], MultiSelectState<T>>((props) => useMultiSelectField(props), { initialProps })
     expect(result.current[0]).toEqual([{ prop: 'value' }])
     act(() => {
       result.current[4](initialProps[0])
