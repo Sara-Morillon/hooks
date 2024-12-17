@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react'
-import { useTheme } from '../../src/useTheme'
-import { changeMatchMedia, mockMatchMedia } from '../mock'
+import { useTheme } from '../../src/useTheme.js'
+import { changeMatchMedia, mockMatchMedia } from '../mock.js'
 
 describe('useTheme', () => {
   it('should use default dark theme value', () => {

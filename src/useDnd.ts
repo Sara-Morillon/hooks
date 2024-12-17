@@ -1,4 +1,4 @@
-import { DragEvent, useCallback, useMemo, useState } from 'react'
+import { type DragEvent, useCallback, useMemo, useState } from 'react'
 
 interface IDragEvents {
   onDragStart: (e: DragEvent) => void
@@ -13,7 +13,7 @@ export function useDrag(source: string): [boolean, IDragEvents] {
       setIsDragged(true)
       e.dataTransfer.setData('source', source)
     },
-    [source]
+    [source],
   )
 
   const onDragEnd = useCallback((e: DragEvent) => {
@@ -49,7 +49,7 @@ export function useDrop(dropHandler: (source: string) => void): [boolean, IDropE
       dropHandler(e.dataTransfer.getData('source'))
       setIsOver(false)
     },
-    [dropHandler]
+    [dropHandler],
   )
 
   return useMemo(() => [isOver, { onDragOver, onDragLeave, onDrop }], [isOver, onDragOver, onDragLeave, onDrop])

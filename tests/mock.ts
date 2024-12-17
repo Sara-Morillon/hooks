@@ -33,16 +33,6 @@ export function changeMatchMedia(matches: boolean) {
   })
 }
 
-export function mockPromiseChain() {
-  return vi.fn().mockReturnValue({
-    then: vi.fn().mockReturnValue({
-      catch: vi.fn().mockReturnValue({
-        finally: vi.fn(),
-      }),
-    }),
-  })
-}
-
 export function flushPromises() {
   return act(() => new Promise((resolve) => setTimeout(resolve, 0)))
 }
