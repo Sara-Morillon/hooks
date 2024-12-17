@@ -342,13 +342,16 @@ function MyComponent() {
   const { ref, visible, show, hide } = useDialog()
 
   return (
-    <dialog ref={ref} onClick={hide}>
-      {visible && (
-        <div onClick={(e) => e.stopPropagation()}>
-          <button onClick={hide}>Hide dialog</button>
-        </div>
-      )}
-    </dialog>
+    <>
+      <button onClick={show}>Show dialog</button>
+      <dialog ref={ref} onClick={hide}>
+        {visible && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <button onClick={hide}>Hide dialog</button>
+          </div>
+        )}
+      </dialog>
+    </>
   )
 }
 ```
