@@ -15,6 +15,12 @@ describe('useFetch', () => {
     expect(result.current[1].loading).toBe(true)
   })
 
+  it('should not be loading by default if auto fetch is false', () => {
+    const fetchFn = mockPromiseChain()
+    const { result } = renderHook(() => useFetch(fetchFn, '', false))
+    expect(result.current[1].loading).toBe(false)
+  })
+
   it('should not have error by default', () => {
     const fetchFn = mockPromiseChain()
     const { result } = renderHook(() => useFetch(fetchFn, ''))
