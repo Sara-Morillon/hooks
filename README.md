@@ -10,6 +10,7 @@ Some utility hooks.
 - [useForm](#useform)
 - [useCopy](#usecopy)
 - [useDrag/useDrop](#usedrag/usedrop)
+- [useDialog](#usedialog)
 - [Contribute](#contribute)
 
 # useTheme
@@ -327,6 +328,49 @@ An array containing:
 
 - `isOver: boolean` - indicates weither a dragged item is currently over the target
 - `IDropEvents` - an object containing events to attach to the target
+
+# useDialog
+
+`useDialog` provides helpers to show and hide native HTML dialogs.
+
+## Example
+
+```typescript
+import { useDialog } from '@saramorillon/hooks'
+
+function MyComponent() {
+  const { ref, visible, show, hide } = useDialog()
+
+  return (
+    <dialog ref={ref} onClick={hide}>
+      {visible && (
+        <div onClick={(e) => e.stopPropagation()}>
+          <button onClick={hide}>Hide dialog</button>
+        </div>
+      )}
+    </dialog>
+  )
+}
+```
+
+## API
+
+```typescript
+useDialog(): IDialog
+```
+
+### Arguments
+
+None
+
+### Returns
+
+An object containing:
+
+- `ref: RefObject<HTMLDialogElement>` - the dialog ref
+- `visible: boolean` - indicates weither the dialog is visible or not
+- `show: () => void` - a function to show the dialog
+- `hide: () => void` - a function to hide the dialog
 
 # Contribute
 
