@@ -21,9 +21,13 @@ export function useCopy(): [boolean, ICopyStatus, (data: string) => void] {
   }, [])
 
   useEffect(() => {
-    void navigator.permissions.query({ name: 'clipboard-write' as PermissionName }).then((result) => {
-      setAuthorized(result.state == 'granted' || result.state == 'prompt')
-    })
+    if (navigator.userAgent.includes('Firefox')) {
+      setAuthorized(true)
+    } else {
+      void navigator.permissions.query({ name: 'clipboard-write' as PermissionName }).then((result) => {
+        setAuthorized(result.state == 'granted' || result.state == 'prompt')
+      })
+    }
   }, [])
 
   return useMemo(() => [authorized, { loading, error }, copy], [authorized, loading, error, copy])

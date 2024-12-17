@@ -13,20 +13,27 @@ describe('useCopy', () => {
     vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue(undefined)
   })
 
-  it('should be authorized if copy permissions state is granted', async () => {
+  it('should be authorized for Firefox user agent', async () => {
+    vi.spyOn(window.navigator, 'userAgent', 'get').mockReturnValue('Firefox')
     const { result } = renderHook(() => useCopy())
     await flushPromises()
     expect(result.current[0]).toBe(true)
   })
 
-  it('should be authorized if copy permissions state is prompt', async () => {
+  it('should be authorized if user agent is not Firefox and copy permissions state is granted', async () => {
+    const { result } = renderHook(() => useCopy())
+    await flushPromises()
+    expect(result.current[0]).toBe(true)
+  })
+
+  it('should be authorized if user agent is not Firefox and copy permissions state is prompt', async () => {
     vi.spyOn(navigator.permissions, 'query').mockResolvedValue({ state: 'prompt' } as unknown as PermissionStatus)
     const { result } = renderHook(() => useCopy())
     await flushPromises()
     expect(result.current[0]).toBe(true)
   })
 
-  it('should not be authorized if copy permissions state is denied', async () => {
+  it('should not be authorized if user agent is not Firefox and copy permissions state is denied', async () => {
     vi.spyOn(navigator.permissions, 'query').mockResolvedValue({ state: 'denied' } as unknown as PermissionStatus)
     const { result } = renderHook(() => useCopy())
     await flushPromises()
