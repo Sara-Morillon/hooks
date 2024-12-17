@@ -21,8 +21,8 @@ export function useDialog(): IDialog {
 
   useEffect(() => {
     if (ref.current) {
-      if (visible) ref.current.showModal()
-      else ref.current.close()
+      if (!visible) ref.current.close()
+      else if (!ref.current.open) ref.current.showModal()
     }
   }, [visible])
 
