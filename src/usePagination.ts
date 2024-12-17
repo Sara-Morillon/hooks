@@ -13,9 +13,9 @@ export interface IPagination {
   canNext: boolean
 }
 
-export function usePagination(): IPagination {
+export function usePagination(initialPage = 1): IPagination {
   const [maxPage, setMaxPage] = useState(1)
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(initialPage)
 
   const goTo = useCallback(
     (action: number | ((page: number) => number)) => {

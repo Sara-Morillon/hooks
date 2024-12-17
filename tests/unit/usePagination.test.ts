@@ -6,6 +6,11 @@ describe('page', () => {
     const { result } = renderHook(() => usePagination())
     expect(result.current.page).toBe(1)
   })
+
+  it('should return initial page', () => {
+    const { result } = renderHook(() => usePagination(5))
+    expect(result.current.page).toBe(5)
+  })
 })
 
 describe('maxPages', () => {

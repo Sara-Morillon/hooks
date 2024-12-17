@@ -136,12 +136,12 @@ return (
 ## API
 
 ```typescript
-usePagination(): IPagination
+usePagination(initialValue = 1): IPagination
 ```
 
 ### Arguments
 
-None
+`initialValue?: number` - The initial page (default 1).
 
 ### Returns
 
