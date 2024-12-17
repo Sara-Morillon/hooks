@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react-hooks'
+import { act, Renderer, renderHook, RenderHookOptions, RenderHookResult } from '@testing-library/react-hooks'
 
 class MatchMediaMock extends EventTarget {
   constructor(public matches: boolean) {
@@ -41,4 +41,17 @@ export function mockPromiseChain() {
       }),
     }),
   })
+}
+
+export async function renderHookAsync<TProps, TResult>(
+  callback: (props: TProps) => TResult,
+  options?: RenderHookOptions<TProps>
+): Promise<RenderHookResult<TProps, TResult, Renderer<TProps>>> {
+  const result = renderHook<TProps, TResult>(callback, options)
+  await flushPromises()
+  return result
+}
+
+export async function flushPromises() {
+  return act(async () => new Promise((resolve) => setTimeout(resolve, 0)))
 }
