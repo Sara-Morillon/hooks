@@ -1,17 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react'
 
 interface IFetchedStatus {
   loading: boolean
   error?: unknown
 }
 
-export function useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T): [T, IFetchedStatus, () => void] {
+export function useFetch<T>(
+  fetchFn: () => Promise<T>,
+  defaultValue: T
+): [T, IFetchedStatus, () => void, Dispatch<SetStateAction<T>>] {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<T>(defaultValue)
   const [error, setError] = useState()
   const [mounted, setMounted] = useState(false)
 
-  const refresh = useCallback(() => {
+  const replay = useCallback(() => {
     if (mounted) {
       setLoading(true)
       fetchFn()
@@ -23,11 +26,11 @@ export function useFetch<T>(fetchFn: () => Promise<T>, defaultValue: T): [T, IFe
 
   useEffect(() => {
     setMounted(true)
-    refresh()
+    replay()
     return () => {
       setMounted(false)
     }
-  }, [refresh])
+  }, [replay])
 
-  return useMemo(() => [data, { loading, error }, refresh], [data, loading, error, refresh])
+  return useMemo(() => [data, { loading, error }, replay, setData], [data, loading, error, replay])
 }
