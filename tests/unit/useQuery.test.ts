@@ -28,6 +28,13 @@ describe('useQuery', () => {
     expect(queryFn).toHaveBeenCalled()
   })
 
+  it('should set loading to true if autoRun is true', async () => {
+    const queryFn = vi.fn().mockResolvedValue('result')
+    const { result } = renderHook(() => useQuery(queryFn, { autoRun: true }))
+    expect(result.current.loading).toBe(true)
+    await act(() => new Promise(setImmediate))
+  })
+
   it('should run callback when executing query', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useQuery(queryFn))
