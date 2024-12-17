@@ -62,7 +62,7 @@ describe('useFetch', () => {
     const { result, waitForNextUpdate } = renderHook(() => useFetch(fetchFn, ''))
     await waitForNextUpdate()
     act(() => {
-      result.current[1].refresh()
+      result.current[2]()
     })
     expect(result.current[1].loading).toBe(true)
     await waitForNextUpdate()
@@ -74,7 +74,7 @@ describe('useFetch', () => {
     const { result, waitForNextUpdate } = renderHook(() => useFetch(fetchFn, ''))
     await waitForNextUpdate()
     act(() => {
-      result.current[1].refresh()
+      result.current[2]()
     })
     expect(fetchFn).toHaveBeenCalled()
     await waitForNextUpdate()
