@@ -41,6 +41,47 @@ function MyComponent() {
 }
 ```
 
+## usePagination
+
+`usePagination` provides an easy way to generate a full pagination system.
+
+```typescript
+import { usePagination } from '@saramorillon/hooks'
+import { getData } from './service'
+
+const limit = 10
+
+function MyComponent() {
+  const { page, maxPages, setMaxPages, first, previous, next, last, canPrevious, canNext } = usePagination()
+  const fetch = useCallback(() => getData(page, limit), [page])
+  const [{ data, total }] = useFetch(fetch, { data: [], total: 0 })
+
+  useEffect(() => {
+    setMaxPages(Math.ceil(total / limit))
+  }, [setMaxPages, total])
+}
+
+return (
+  <div>
+    <button disabled={!canPrevious} onClick={first}>
+      First page
+    </button>
+    <button disabled={!canPrevious} onClick={previous}>
+      Previous page
+    </button>
+    <span>
+      Page {page} of {maxPages}
+    </span>
+    <button disabled={!canNext} onClick={next}>
+      Next page
+    </button>
+    <button disabled={!canNext} onClick={last}>
+      Last page
+    </button>
+  </div>
+)
+```
+
 ## fields
 
 `fields` hooks are wrappers designed for form fields based on component state or props.
@@ -168,6 +209,24 @@ useFetch<T>(fetchFn: () => Promise<T>, defaultValue?: T): [T, IFetchedStatus, ()
 **Returns**
 
 The value return by the action, the status of the action and a refresh function.
+
+---
+
+```typescript
+usePagination(): IPagination
+```
+
+**Arguments**
+
+None
+
+**Returns**
+
+The current page, the max page and a fonction to set the max page.
+
+Actions to navigate: first, previous, next, last and goTo.
+
+State of the current navigation: canPrevious and canNext.
 
 ---
 

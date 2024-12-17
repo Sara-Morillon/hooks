@@ -1,5 +1,6 @@
 import { useFetch } from './useFetch'
 import { useBoolean, useMultiSelect, useNumber, useSelect, useText } from './useFields'
+import { usePagination } from './usePagination'
 import { useTheme } from './useTheme'
 
 const fields = {
@@ -10,4 +11,4 @@ const fields = {
   useSelect,
 }
 
-export { useFetch, fields, useTheme }
+export { useFetch, fields, useTheme, usePagination }
