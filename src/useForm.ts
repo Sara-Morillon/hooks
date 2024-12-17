@@ -1,31 +1,43 @@
 import { FormEvent, useCallback, useMemo, useState } from 'react'
 
 export interface IForm<T = never> {
-  onSubmit(e?: FormEvent): void
   values: T
   onChange<K extends keyof T>(name: K, value: T[K]): void
-  onReset(): void
+  submit(e?: FormEvent): void
+  reset(): void
+  loading: boolean
+  error?: unknown
 }
 
-export function useForm<T = never>(onSave: (values: T) => void, initialValues: T): IForm<T> {
+export function useForm<T = never>(save: (values: T) => void | Promise<void>, initialValues: T): IForm<T> {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<unknown>()
   const [values, setValues] = useState<T>(initialValues)
 
   const onChange = useCallback(<K extends keyof T>(name: K, value: T[K]) => {
     setValues((values) => ({ ...values, [name]: value }))
   }, [])
 
-  const onSubmit = useCallback(
+  const submit = useCallback(
     (e?: FormEvent) => {
+      setLoading(true)
+      setError(undefined)
       e?.preventDefault()
       e?.stopPropagation()
-      onSave(values)
+      Promise.resolve()
+        .then(() => save(values))
+        .catch(setError)
+        .finally(() => setLoading(false))
     },
-    [onSave, values]
+    [save, values]
   )
 
-  const onReset = useCallback(() => {
+  const reset = useCallback(() => {
     setValues(initialValues)
   }, [initialValues])
 
-  return useMemo(() => ({ onSubmit, values, onChange, onReset }), [onSubmit, values, onReset, onChange])
+  return useMemo(
+    () => ({ values, onChange, submit, reset, loading, error }),
+    [values, onChange, submit, reset, loading, error]
+  )
 }
