@@ -173,14 +173,14 @@ type Data {
 }
 
 function MyComponent({ data }: { data: Data }) {
-  const onSave = useCallback((values: Partial<Data>) => {
+  const onSave = useCallback((values: Data) => {
     console.log(values)
   }, [])
   const { values, onSubmit, onChange, reset } = useForm(onSave, data)
 
   return (
     <form onSubmit={onSubmit} onReset={onReset}>
-      <input value={name} onChange={(e) => onChange('name', e.target.value)} />
+      <input value={values.name} onChange={(e) => onChange('name', e.target.value)} />
       <button type='submit'>Submit</button>
       <button type='reset'>Reset</button>
     </form>
