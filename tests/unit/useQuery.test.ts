@@ -15,9 +15,16 @@ describe('useQuery', () => {
     expect(result.current.error).toBeUndefined()
   })
 
-  it('should automatically execute query if autoRun is true', () => {
+  it('should return default value by default', () => {
+    const queryFn = vi.fn().mockResolvedValue('result')
+    const { result } = renderHook(() => useQuery(queryFn, { defaultValue: 'default' }))
+    expect(result.current.result).toBe('default')
+  })
+
+  it('should automatically execute query if autoRun is true', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     renderHook(() => useQuery(queryFn, { autoRun: true }))
+    await act(() => new Promise(setImmediate))
     expect(queryFn).toHaveBeenCalled()
   })
 
