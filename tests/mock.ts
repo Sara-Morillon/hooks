@@ -36,3 +36,25 @@ export function changeMatchMedia(matches: boolean) {
 export function flushPromises() {
   return act(() => new Promise((resolve) => setTimeout(resolve, 0)))
 }
+
+export function mockTableData() {
+  return [
+    { name: 'Zola Ray', age: 30 },
+    { name: 'Arlo Curtis', age: 32 },
+    { name: 'Alexis West', age: 39 },
+    { name: 'Diego Fitzpatrick', age: 40 },
+    { name: 'Annabella Vargas', age: 37 },
+    { name: 'Ryker Gregory', age: 34 },
+    { name: 'Alaya Winters', age: 40 },
+    { name: 'Deandre Vu', age: 32 },
+    { name: 'Kimora Higgins', age: 38 },
+    { name: 'Sterling Pugh', age: 30 },
+    { name: 'Landry Pineda', age: 31 },
+    { name: 'Gerardo Pearson', age: 39 },
+    { name: 'Kiara Nava', age: 34 },
+    { name: 'Stefan Hart', age: 35 },
+    { name: 'Gemma Terrell', age: 38 },
+    { name: 'Jaxen Smith', age: 35 },
+    { name: 'Olivia Camacho', age: 30 },
+  ]
+}
