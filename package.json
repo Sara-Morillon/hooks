@@ -10,8 +10,8 @@
     "build": "tsc -p tsconfig.build.json",
     "test": "jest",
     "test:ci": "jest --ci --runInBand --coverage",
-    "lint": "eslint \"src/**/*.ts\"",
-    "format": "prettier --write \"src/**/*.ts\""
+    "lint": "eslint \"{src,tests}/**/*.ts\"",
+    "format": "prettier --write \"{src,tests}/**/*.ts\""
   },
   "files": [
     "dist/*"
