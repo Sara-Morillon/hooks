@@ -7,11 +7,7 @@ Some utility hooks.
 - [useTheme](#usetheme)
 - [useFetch](#usefetch)
 - [usePagination](#usepagination)
-- [useTextField](#usetextfield)
-- [useBooleanField](#usebooleanfield)
-- [useNumberField](#usenumberfield)
-- [useSelectField](#useselectfield)
-- [useMultiSelectField](#usemultiselectfield)
+- [useForm](#useform)
 - [useCopy](#usecopy)
 - [Contribute](#contribute)
 
@@ -162,27 +158,30 @@ An object containing:
 - `canPrevious: boolean` - indicates weither the navigation to the previous page is possible
 - `canNext: boolean` - indicates weither the navigation to the next page is possible
 
-# useTextField
+# useForm
 
-`useTextField` is a wrapper around useState designed for text form fields based on component state or props.
-
-Unlike useState, it automatically refreshes when input value changes.
+`useForm` provides helpers to handle forms.
 
 ## Example
 
 ```typescript
-import { useTextField } from '@saramorillon/hooks'
+import { useForm } from '@saramorillon/hooks'
 
 type Data {
   name: string
 }
 
 function MyComponent({ data }: { data: Data }) {
-  const [name, setName] = useTextField(data.name)
+  const onSave = useCallback((values: Partial<Data>) => {
+    console.log(values)
+  }, [])
+  const { values, onSubmit, onChange, reset } = useForm(onSave, data)
 
   return (
-    <form>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
+    <form onSubmit={onSubmit} onReset={onReset}>
+      <input value={name} onChange={(e) => onChange('name', e.target.value)} />
+      <button type='submit'>Submit</button>
+      <button type='reset'>Reset</button>
     </form>
   )
 }
@@ -191,244 +190,23 @@ function MyComponent({ data }: { data: Data }) {
 ## API
 
 ```typescript
-useTextField(input?: string): State<string>
+useForm<T>(props: IFormProps<T>): IForm<T>
 ```
 
 ### Arguments
 
-`input?: string` - The input value. Default to "".
+`onSave: (values: Partial<T>) => void` - The save action. **/!\ Must be memoized to avoid potential infinite loops.**
+
+`initialValues?: Partial<T>` - The initial values. **/!\ Must be memoized to avoid potential infinite loops.**
 
 ### Returns
 
-An array containing:
-
-- `string` - the current value
-- `React.Dispatch<React.SetStateAction<string>>` - the value modifier
-
-# useBooleanField
-
-`useBooleanField` is a wrapper around useState designed for boolean form fields based on component state or props.
-
-Unlike useState, it automatically refreshes when input value changes.
-
-## Example
-
-```typescript
-import { useBooleanField } from '@saramorillon/hooks'
-
-type Data {
-    valid: boolean
-}
-
-function MyComponent({ data }: { data: Data }) {
-const [valid, setValid] = fields.useBoolean(data.valid)
-
-  return (
-    <form>
-      <input type="checkbox" checked={valid} onChange={(e) => setValid(e.target.checked)} />
-    </form>
-  )
-}
-```
-
-## API
-
-```typescript
-useBooleanField(input?: boolean): State<boolean>
-```
-
-### Arguments
-
-`input?: boolean` - The input value. Default to false.
-
-### Returns
-
-An array containing:
-
-- `boolean` - the current value
-- `React.Dispatch<React.SetStateAction<boolean>>` - the value modifier
-
-# useNumberField
-
-`useNumberField` is a wrapper around useState designed for number form fields based on component state or props.
-
-Unlike useState, it automatically refreshes when input value changes.
-
-## Example
-
-```typescript
-import { useNumberField } from '@saramorillon/hooks'
-
-type Data {
-  quantity: number
-}
-
-function MyComponent({ data }: { data: Data }) {
-  const [quantity, setQuantity] = useNumberField(data.quantity)
-
-  return (
-    <form>
-      <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-    </form>
-  )
-}
-```
-
-## API
-
-```typescript
-useNumberField(input?: number): State<number>
-```
-
-### Arguments
-
-`input?: number` - The input value. Default to 0.
-
-### Returns
-
-An array containing:
-
-- `number` - the current value
-- `React.Dispatch<React.SetStateAction<number>>` - the value modifier
-
-# useSelectField
-
-`useSelectField` is a wrapper around useState designed for select form fields based on component state or props.
-
-Unlike useState, it automatically refreshes when input value changes.
-
-## Example
-
-```typescript
-import { useSelectField } from '@saramorillon/hooks'
-
-type Data {
-  color: 'red' | 'green' | 'blue'
-}
-
-function MyComponent({ data }: { data: Data }) {
-  const [color, setColor] = useSelectField(data.color)
-
-  return (
-    <form>
-      <select value={color} onChange={(e) => setColor(e.target.value)}>
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-      </select>
-    </form>
-  )
-}
-```
-
-## API
-
-```typescript
-useSelect<T>(input: T): State<T>
-```
-
-### Arguments
-
-`input: T` - The input value. **/!\ Must be memoized to avoid infinite loops.**
-
-### Returns
-
-An array containing:
-
-- `T` - the current value
-- `React.Dispatch<React.SetStateAction<T>>` - the value modifier
-
-# useMultiSelectField
-
-`useMultiSelectField` is a wrapper around useState designed for multiple select form fields based on component state or props.
-
-Unlike useState, it automatically refreshes when input value changes.
-
-## Example
-
-```typescript
-import { useMultiSelectField } from '@saramorillon/hooks'
-
-type Data {
-  colors: ('red' | 'green' | 'blue')[]
-}
-
-function MyComponent({ data }: { data: Data }) {
-  const [colors, setColors] = useMultiSelectField(data.colors)
-
-  return (
-    <form>
-      <select value={colors} onChange={(e) => setColors(Array.from(e.target.selectedOptions, (option) => option.value))}>
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="blue">Blue</option>
-      </select>
-    </form>
-  )
-}
-```
-
-## API
-
-```typescript
-useMultiSelect<T>(input?: T[]): State<T[]>
-```
-
-### Arguments
-
-`input` _\[?T\[\]\]_: The input value. Default to \[\]. **/!\ Must be memoized to avoid infinite loops.**
-
-### Returns
-
-An array containing:
-
-- `T[]` - the current values
-- `React.Dispatch<React.SetStateAction<T[]>>` - the values modifier
-- `(value: T) => void` - a function to add a value
-- `(value: T) => void` - a function to remove a value
-- `(value: T) => void` - a function to toggle a value
-
-_Note that additional modifiers are based on `includes` and `filter` fonctions and will only work on primitive or referenced values._
-
-# useCopy
-
-`useCopy` provides an easy way to implement clipboard copy on you website.
-
-## Example
-
-```typescript
-import { useCopy } from '@saramorillon/hooks'
-
-function MyComponent() {
-  const [authorized, status, copy] = useCopy(data.name)
-
-  return (
-    <button disabled={!authorized} onClick={copy}>
-      Copy
-    </button>
-  )
-}
-```
-
-## API
-
-```typescript
-useCopy(): [boolean, ICopyStatus, (data: string) => void]
-```
-
-### Arguments
-
-None
-
-### Returns
-
-An array containing:
-
-- `boolean` - indicates weither the copy is allowed or not
-- `ICopyStatus` - an object containing
-  - `loading: boolean` - indicates weither the copy is currently pending or not
-  - `error: unknown` - the error potentially generated by the copy
-- `(data: string) => void` - the copy function
+An object containing:
+
+- `values?: Partial<T>` - the form values
+- `onSubmit: (e: FormEvent) => void` - a function for submitting a form
+- `onChange: <K extends keyof T>(name: K, value: Partial<T>[K]) => void` - a function to change the values of the form
+- `reset: () => void` - a function to reset the form to its initial values
 
 # Contribute
 
