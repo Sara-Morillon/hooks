@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { type IFilter, type IFilterFunctions, useFilter } from './useFilter.js'
 import { type IPaginate, usePaginate } from './usePaginate.js'
-import { ISort, useSort } from './useSort.js'
+import { type ISort, useSort } from './useSort.js'
 
 interface IState<T> {
   filter: IFilter<T>

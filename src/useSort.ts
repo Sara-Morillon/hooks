@@ -19,18 +19,15 @@ export function useSort<T>(data: T[]) {
 
   const rows = useMemo(() => {
     return data.toSorted((rowA: T, rowB: T) => {
-      let result = 0
       for (const { column, dir } of state) {
-        if (result === 0) {
-          if (rowA[column] < rowB[column]) {
-            return dir === 'asc' ? -1 : 1
-          }
-          if (rowA[column] > rowB[column]) {
-            return dir === 'asc' ? 1 : -1
-          }
+        if (rowA[column] < rowB[column]) {
+          return dir === 'asc' ? -1 : 1
+        }
+        if (rowA[column] > rowB[column]) {
+          return dir === 'asc' ? 1 : -1
         }
       }
-      return result
+      return 0
     })
   }, [data, state])
 
