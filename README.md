@@ -176,7 +176,7 @@ function MyComponent({ data }: { data: Data }) {
   const onSave = useCallback((values: Data) => {
     console.log(values)
   }, [])
-  const { values, onSubmit, onChange, reset } = useForm(onSave, data)
+  const { values, onSubmit, onChange, onReset } = useForm(onSave, data)
 
   return (
     <form onSubmit={onSubmit} onReset={onReset}>
@@ -207,7 +207,7 @@ An object containing:
 - `values: T` - the form values
 - `onSubmit: (e: FormEvent) => void` - a function for submitting a form
 - `onChange: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form
-- `reset: () => void` - a function to reset the form to its initial values
+- `onReset: () => void` - a function to reset the form to its initial values
 
 # useCopy
 

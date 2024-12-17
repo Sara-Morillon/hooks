@@ -4,7 +4,7 @@ export interface IForm<T = never> {
   onSubmit(e?: FormEvent): void
   values: T
   onChange<K extends keyof T>(name: K, value: T[K]): void
-  reset(): void
+  onReset(): void
 }
 
 export function useForm<T = never>(onSave: (values: T) => void, initialValues: T): IForm<T> {
@@ -23,9 +23,9 @@ export function useForm<T = never>(onSave: (values: T) => void, initialValues: T
     [onSave, values]
   )
 
-  const reset = useCallback(() => {
+  const onReset = useCallback(() => {
     setValues(initialValues)
   }, [initialValues])
 
-  return useMemo(() => ({ onSubmit, values, onChange, reset }), [onSubmit, values, reset, onChange])
+  return useMemo(() => ({ onSubmit, values, onChange, onReset }), [onSubmit, values, onReset, onChange])
 }
