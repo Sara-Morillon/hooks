@@ -195,17 +195,17 @@ useForm<T>(props: IFormProps<T>): IForm<T>
 
 ### Arguments
 
-`onSave: (values: Partial<T>) => void` - The save action. **/!\ Must be memoized to avoid potential infinite loops.**
+`onSave: (values: T) => void` - The save action. **/!\ Must be memoized to avoid potential infinite loops.**
 
-`initialValues?: Partial<T>` - The initial values. **/!\ Must be memoized to avoid potential infinite loops.**
+`initialValues: T` - The initial values.
 
 ### Returns
 
 An object containing:
 
-- `values?: Partial<T>` - the form values
+- `values: T` - the form values
 - `onSubmit: (e: FormEvent) => void` - a function for submitting a form
-- `onChange: <K extends keyof T>(name: K, value: Partial<T>[K]) => void` - a function to change the values of the form
+- `onChange: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form
 - `reset: () => void` - a function to reset the form to its initial values
 
 # Contribute
