@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { IFilterFunctions, useFilter } from '../../src/useFilter.js'
+import { type IFilterFunctions, useFilter } from '../../src/useFilter.js'
 import { mockTableData } from '../mock.js'
 
 describe('useFilter', () => {

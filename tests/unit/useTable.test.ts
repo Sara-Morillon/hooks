@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { ITableOptions, useTable } from '../../src/useTable.js'
+import { type ITableOptions, useTable } from '../../src/useTable.js'
 import { mockTableData } from '../mock.js'
 
 describe('useTable', () => {
@@ -31,7 +31,7 @@ describe('useTable', () => {
     act(() => result.current.goTo(2))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: { age: { dir: 'desc', index: 0 } },
       pagination: { index: 2, limit: 5 },
     })
   })

@@ -5,7 +5,7 @@ import { type ISort, useSort } from './useSort.js'
 
 interface IState<T> {
   filter: IFilter<T>
-  sort: ISort<T>[]
+  sort: ISort<T>
   pagination: IPaginate
 }
 
