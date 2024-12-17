@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
+interface IQueryOptions {
+  autoRun?: boolean
+}
+
 interface IQueryResult<T> {
   execute: () => Promise<void>
   loading: boolean
@@ -7,7 +11,7 @@ interface IQueryResult<T> {
   result?: T
 }
 
-export function useQuery<T>(queryFn: () => Promise<T>): IQueryResult<T> {
+export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions = {}): IQueryResult<T> {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<T>()
   const [error, setError] = useState<unknown>()
@@ -38,6 +42,12 @@ export function useQuery<T>(queryFn: () => Promise<T>): IQueryResult<T> {
     }
     return Promise.resolve()
   }, [mounted, queryFn])
+
+  useEffect(() => {
+    if (options.autoRun) {
+      void execute()
+    }
+  }, [execute, options.autoRun])
 
   return useMemo(() => ({ execute, loading, error, result }), [execute, loading, error, result])
 }
