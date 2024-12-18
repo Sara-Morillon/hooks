@@ -1,14 +1,10 @@
 import { act, renderHook } from '@testing-library/react'
 import { type ITableOptions, useTable } from '../../src/useTable.js'
-import { mockTableData } from '../mock.js'
+import { IData, mockTableData } from '../mock.js'
 
 describe('useTable', () => {
   it('should return filtered, sorted and paginated rows', () => {
-    const options: ITableOptions<ReturnType<typeof mockTableData>[number]> = {
-      filterFunctions: {
-        name: (row, value) => typeof value === 'string' && row.name.includes(value),
-      },
-    }
+    const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
     const { result } = renderHook(() => useTable(mockTableData(), options))
     act(() => result.current.filter('name', 'a'))
     act(() => result.current.sort('age', 'desc'))
@@ -38,11 +34,7 @@ describe('useTable', () => {
   })
 
   it('should return total filtered rows', () => {
-    const options: ITableOptions<ReturnType<typeof mockTableData>[number]> = {
-      filterFunctions: {
-        name: (row, value) => typeof value === 'string' && row.name.includes(value),
-      },
-    }
+    const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
     const { result } = renderHook(() => useTable(mockTableData(), options))
     act(() => result.current.filter('name', 'a'))
     expect(result.current.total).toBe(13)

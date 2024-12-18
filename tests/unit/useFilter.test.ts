@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react'
 import { type IFilterFunctions, useFilter } from '../../src/useFilter.js'
-import { mockTableData } from '../mock.js'
+import { IData, mockTableData } from '../mock.js'
 
 describe('useFilter', () => {
   it('should return all rows by default', () => {
@@ -20,8 +20,8 @@ describe('useFilter', () => {
     expect(result.current.rows).toEqual(mockTableData())
   })
 
-  it('should not filter rows if filter is an empty array', () => {
-    const { result } = renderHook(() => useFilter(mockTableData()))
+  it('should not filter rows if filter is an empty ', () => {
+    const { result } = renderHook(() => useFilter<IData, { name: string[]; age: number }>(mockTableData()))
     act(() => result.current.filter('name', []))
     expect(result.current.rows).toEqual(mockTableData())
   })
@@ -33,9 +33,7 @@ describe('useFilter', () => {
   })
 
   it('should filter rows with custom filter function', () => {
-    const filterFunctions: IFilterFunctions<ReturnType<typeof mockTableData>[number]> = {
-      name: (row, value) => typeof value === 'string' && row.name.includes(value),
-    }
+    const filterFunctions: IFilterFunctions<IData> = { name: (row, value) => row.name.includes(value) }
     const { result } = renderHook(() => useFilter(mockTableData(), filterFunctions))
     act(() => result.current.filter('name', 'x'))
     expect(result.current.rows).toEqual([

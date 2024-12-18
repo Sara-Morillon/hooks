@@ -37,7 +37,12 @@ export function flushPromises() {
   return act(() => new Promise((resolve) => setTimeout(resolve, 0)))
 }
 
-export function mockTableData() {
+export interface IData {
+  name: string
+  age: number
+}
+
+export function mockTableData(): IData[] {
   return [
     { name: 'Zola Ray', age: 30 },
     { name: 'Arlo Curtis', age: 32 },

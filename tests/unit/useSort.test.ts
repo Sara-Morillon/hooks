@@ -59,7 +59,7 @@ describe('useSort', () => {
   it('should clear sort', () => {
     const { result } = renderHook(() => useSort(mockTableData()))
     act(() => result.current.sort('name', 'asc'))
-    act(() => result.current.sort('name', null))
+    act(() => result.current.sort('name'))
     expect(result.current.rows).toEqual(mockTableData())
   })
 
