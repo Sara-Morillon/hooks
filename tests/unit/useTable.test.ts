@@ -31,7 +31,8 @@ describe('useTable', () => {
     act(() => result.current.goTo(2))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
-      sort: { age: { dir: 'desc', index: 0 } },
+      sort: [{ column: 'age', dir: 'desc' }],
+      sortDir: { age: 'desc' },
       pagination: { index: 2, limit: 5 },
     })
   })

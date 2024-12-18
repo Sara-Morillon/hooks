@@ -1,17 +1,17 @@
 import { useCallback, useMemo, useState } from 'react'
 
 export type IFilter<T> = {
-  [key in keyof T]?: T[key] | T[key][]
+  [key in keyof T]?: unknown
 }
 
 export type IFilterFunctions<T> = {
-  [column in keyof T]?: (row: T, filter: T[column] | T[column][]) => boolean
+  [column in keyof T]?: (row: T, filter: unknown) => boolean
 }
 
 export function useFilter<T>(data: T[], filterFunctions?: IFilterFunctions<T>) {
   const [state, setState] = useState<IFilter<T>>({})
 
-  const filter = useCallback(<K extends keyof T>(column: K, value?: T[K] | T[K][]) => {
+  const filter = useCallback(<K extends keyof T>(column: K, value?: unknown) => {
     setState((state) => ({ ...state, [column]: value }))
   }, [])
 

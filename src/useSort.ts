@@ -1,16 +1,17 @@
 import { useCallback, useMemo, useState } from 'react'
 
-export type ISort<T> = {
-  [key in keyof T]?: { dir: 'asc' | 'desc'; index: number }
+export interface ISort<T> {
+  column: keyof T
+  dir: 'asc' | 'desc'
 }
 
 export function useSort<T>(data: T[]) {
-  const [state, setState] = useState<{ column: keyof T; dir: 'asc' | 'desc' }[]>([])
+  const [state, setState] = useState<ISort<T>[]>([])
 
-  const sort = useCallback((column: keyof T, dir: 'asc' | 'desc' | null) => {
+  const sort = useCallback((column: keyof T, dir?: 'asc' | 'desc') => {
     setState((state) => {
       const newState = state.filter((s) => s.column !== column)
-      if (dir !== null) {
+      if (dir) {
         newState.push({ column, dir })
       }
       return newState
@@ -31,12 +32,5 @@ export function useSort<T>(data: T[]) {
     })
   }, [data, state])
 
-  const reduced = useMemo(() => {
-    return state.reduce((acc: ISort<T>, curr, index) => {
-      acc[curr.column] = { dir: curr.dir, index }
-      return acc
-    }, {})
-  }, [state])
-
-  return useMemo(() => ({ state: reduced, sort, rows }), [reduced, sort, rows])
+  return useMemo(() => ({ state, sort, rows }), [state, sort, rows])
 }
