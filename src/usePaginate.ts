@@ -5,7 +5,7 @@ export interface IPaginate {
   limit: number
 }
 
-export function usePaginate<T>(data: T[]) {
+export function usePaginationState() {
   const [state, setState] = useState<IPaginate>({ index: 1, limit: 10 })
 
   const goTo = useCallback((index: number) => {
@@ -16,9 +16,15 @@ export function usePaginate<T>(data: T[]) {
     setState((state) => ({ ...state, limit }))
   }, [])
 
-  const rows = useMemo(() => {
-    return data.slice((state.index - 1) * state.limit, state.index * state.limit)
-  }, [data, state])
+  return useMemo(() => ({ state, goTo, setLimit }), [state, goTo, setLimit])
+}
 
-  return useMemo(() => ({ state, goTo, setLimit, rows }), [state, goTo, setLimit, rows])
+export function usePaginatedRows<T>(data: T[], pagination?: IPaginate) {
+  return useMemo(() => {
+    if (!pagination) {
+      return data
+    }
+
+    return data.slice((pagination.index - 1) * pagination.limit, pagination.index * pagination.limit)
+  }, [data, pagination])
 }

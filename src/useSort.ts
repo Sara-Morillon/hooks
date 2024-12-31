@@ -5,7 +5,7 @@ export interface ISort<T> {
   dir: 'asc' | 'desc'
 }
 
-export function useSort<T>(data: T[]) {
+export function useSortState<T>() {
   const [state, setState] = useState<ISort<T>[]>([])
 
   const sort = useCallback((column: keyof T, dir?: 'asc' | 'desc') => {
@@ -18,9 +18,17 @@ export function useSort<T>(data: T[]) {
     })
   }, [])
 
-  const rows = useMemo(() => {
+  return useMemo(() => ({ state, sort }), [state, sort])
+}
+
+export function useSortedRows<T>(data: T[], sort?: ISort<T>[]) {
+  return useMemo(() => {
+    if (!sort) {
+      return data
+    }
+
     return data.toSorted((rowA: T, rowB: T) => {
-      for (const { column, dir } of state) {
+      for (const { column, dir } of sort) {
         if (rowA[column] < rowB[column]) {
           return dir === 'asc' ? -1 : 1
         }
@@ -30,7 +38,5 @@ export function useSort<T>(data: T[]) {
       }
       return 0
     })
-  }, [data, state])
-
-  return useMemo(() => ({ state, sort, rows }), [state, sort, rows])
+  }, [data, sort])
 }

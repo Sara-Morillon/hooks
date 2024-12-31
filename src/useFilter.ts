@@ -8,16 +8,28 @@ export type IFilterFunctions<T, F extends IFilter<T> = T> = {
   [column in keyof T]?: (row: T, filter: F[column]) => boolean
 }
 
-export function useFilter<T, F extends IFilter<T> = T>(data: T[], filterFunctions?: IFilterFunctions<T, F>) {
+export function useFilterState<T, F extends IFilter<T> = T>() {
   const [state, setState] = useState<Partial<F>>({})
 
   const filter = useCallback(<K extends keyof F>(column: K, value?: F[K]) => {
     setState((state) => ({ ...state, [column]: value }))
   }, [])
 
-  const rows = useMemo(() => {
+  return useMemo(() => ({ state, filter }), [state, filter])
+}
+
+export function useFilteredRows<T, F extends IFilter<T> = T>(
+  data: T[],
+  filters?: Partial<F>,
+  filterFunctions?: IFilterFunctions<T, F>,
+) {
+  return useMemo(() => {
+    if (!filters) {
+      return data
+    }
+
     return data.filter((row) => {
-      return Object.entries(state).every((entry) => {
+      return Object.entries(filters).every((entry) => {
         const column = entry[0] as keyof T
         const value = entry[1] as F[keyof T]
         if (value === undefined || value === null || value === '' || (Array.isArray(value) && !value.length)) {
@@ -30,7 +42,5 @@ export function useFilter<T, F extends IFilter<T> = T>(data: T[], filterFunction
         return row[column] === value
       })
     })
-  }, [data, state, filterFunctions])
-
-  return useMemo(() => ({ state, filter, rows }), [state, filter, rows])
+  }, [data, filters, filterFunctions])
 }
