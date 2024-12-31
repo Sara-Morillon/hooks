@@ -5,8 +5,8 @@ export interface IPaginate {
   limit: number
 }
 
-export function usePaginationState() {
-  const [state, setState] = useState<IPaginate>({ index: 1, limit: 10 })
+export function usePaginationState(initialPagination: IPaginate = { index: 1, limit: 10 }) {
+  const [state, setState] = useState<IPaginate>(initialPagination)
 
   const goTo = useCallback((index: number) => {
     setState((state) => ({ ...state, index }))

@@ -9,6 +9,12 @@ describe('usePaginationState', () => {
     expect(result.current.state.limit).toBe(10)
   })
 
+  it('should return initial index and limit', () => {
+    const { result } = renderHook(() => usePaginationState({ index: 2, limit: 5 }))
+    expect(result.current.state.index).toBe(2)
+    expect(result.current.state.limit).toBe(5)
+  })
+
   it('should change index', () => {
     const { result } = renderHook(() => usePaginationState())
     act(() => result.current.goTo(2))

@@ -31,10 +31,10 @@ export interface ITableOptions<T, F extends IFilter<T> = T> {
   filterFunctions: IFilterFunctions<T, F>
 }
 
-export function useTableState<T, F extends IFilter<T> = T>(): ITableState<T, F> {
-  const { state: filterState, filter } = useFilterState<T, F>()
-  const { state: sortState, sort } = useSortState<T>()
-  const { state: paginationState, goTo, setLimit } = usePaginationState()
+export function useTableState<T, F extends IFilter<T> = T>(initialState?: IInitialState<T, F>): ITableState<T, F> {
+  const { state: filterState, filter } = useFilterState<T, F>(initialState?.filter)
+  const { state: sortState, sort } = useSortState<T>(initialState?.sort)
+  const { state: paginationState, goTo, setLimit } = usePaginationState(initialState?.pagination)
 
   const state = useMemo(() => {
     const state: IState<T, F> = {
@@ -66,8 +66,12 @@ export function useTableRows<T, F extends IFilter<T> = T>(
   return useMemo(() => ({ rows, total: filteredRows.length }), [rows, filteredRows])
 }
 
-export function useTable<T, F extends IFilter<T> = T>(data: T[], options?: ITableOptions<T, F>): ITable<T, F> {
-  const { state, filter, sort, goTo, setLimit } = useTableState<T, F>()
+export function useTable<T, F extends IFilter<T> = T>(
+  data: T[],
+  initialState?: IInitialState<T, F>,
+  options?: ITableOptions<T, F>,
+): ITable<T, F> {
+  const { state, filter, sort, goTo, setLimit } = useTableState<T, F>(initialState)
   const { rows, total } = useTableRows(data, state, options)
 
   return useMemo(

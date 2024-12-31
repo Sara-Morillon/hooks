@@ -8,8 +8,8 @@ export type IFilterFunctions<T, F extends IFilter<T> = T> = {
   [column in keyof T]?: (row: T, filter: F[column]) => boolean
 }
 
-export function useFilterState<T, F extends IFilter<T> = T>() {
-  const [state, setState] = useState<Partial<F>>({})
+export function useFilterState<T, F extends IFilter<T> = T>(initialFilter: Partial<F> = {}) {
+  const [state, setState] = useState<Partial<F>>(initialFilter)
 
   const filter = useCallback(<K extends keyof F>(column: K, value?: F[K]) => {
     setState((state) => ({ ...state, [column]: value }))

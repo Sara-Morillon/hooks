@@ -8,6 +8,11 @@ describe('useSortState', () => {
     expect(result.current.state).toEqual([])
   })
 
+  it('should return initial sort', () => {
+    const { result } = renderHook(() => useSortState<IData>([{ column: 'age', dir: 'desc' }]))
+    expect(result.current.state).toEqual([{ column: 'age', dir: 'desc' }])
+  })
+
   it('should change sort', () => {
     const { result } = renderHook(() => useSortState<IData>())
     act(() => result.current.sort('name', 'asc'))

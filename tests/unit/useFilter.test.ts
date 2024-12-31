@@ -8,6 +8,11 @@ describe('useFilterState', () => {
     expect(result.current.state).toEqual({})
   })
 
+  it('should return initial filters', () => {
+    const { result } = renderHook(() => useFilterState<IData>({ name: 'Jaxen Smith' }))
+    expect(result.current.state).toEqual({ name: 'Jaxen Smith' })
+  })
+
   it('should change filter', () => {
     const { result } = renderHook(() => useFilterState<IData>())
     act(() => result.current.filter('name', 'Zola Ray'))

@@ -5,8 +5,8 @@ export interface ISort<T> {
   dir: 'asc' | 'desc'
 }
 
-export function useSortState<T>() {
-  const [state, setState] = useState<ISort<T>[]>([])
+export function useSortState<T>(initialSort: ISort<T>[] = []) {
+  const [state, setState] = useState<ISort<T>[]>(initialSort)
 
   const sort = useCallback((column: keyof T, dir?: 'asc' | 'desc') => {
     setState((state) => {
