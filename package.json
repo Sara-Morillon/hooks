@@ -1,6 +1,6 @@
 {
   "name": "@saramorillon/hooks",
-  "version": "2.15.0",
+  "version": "2.16.0",
   "author": "Sara Morillon",
   "description": "Some utility hooks",
   "main": "dist/index.js",
@@ -12,7 +12,9 @@
     "lint": "eslint \"{src,tests}/**/*.ts\"",
     "format": "prettier --write \"{src,tests}/**/*.ts\""
   },
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:saramorillon/hooks.git"
