@@ -1,10 +1,10 @@
 # useDialog
 
-`useDialog` provides helpers to show and hide native HTML dialogs.
+`useDialog` offers helpers to show and hide native HTML dialogs.
 
 ## Example
 
-```typescript
+```tsx
 import { useDialog } from '@saramorillon/hooks'
 
 function MyComponent() {
@@ -37,7 +37,7 @@ None
 
 ### Returns
 
-An object containing:
+`IDialog` - An object containing:
 
 - `ref: RefObject<HTMLDialogElement>` - the dialog ref
 - `visible: boolean` - indicates weither the dialog is visible or not

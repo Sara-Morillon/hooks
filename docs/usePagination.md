@@ -1,10 +1,10 @@
 # usePagination
 
-`usePagination` provides an easy way to generate a full pagination system.
+`usePagination` offers an easy way to generate a full pagination system.
 
 ## Example
 
-```typescript
+```tsx
 import { usePagination } from '@saramorillon/hooks'
 import { getData } from './service'
 
@@ -49,18 +49,19 @@ usePagination(maxPage: number, initialValue = 1): IPagination
 
 ### Arguments
 
-`maxPage: number` - The maximum page
-`initialValue?: number` - The initial page (default 1).
+`maxPage: number` - the maximum page.
+
+`initialValue?: number` - the initial page (default 1).
 
 ### Returns
 
 An object containing:
 
-- `page: number` - the current page
-- `goTo: React.Dispatch<React.SetStateAction<number>>` - a function to go to a specific page
-- `first: () => void` - a function to go to the first page
-- `previous: () => void` - a function to go to the previous page
-- `next: () => void` - a function to go to the next page
-- `last: () => void` - a function to go to the last page
-- `canPrevious: boolean` - indicates weither the navigation to the previous page is possible
-- `canNext: boolean` - indicates weither the navigation to the next page is possible
+- `page: number` - the current page.
+- `goTo: React.Dispatch<React.SetStateAction<number>>` - a function to go to a specific page.
+- `first: () => void` - a function to go to the first page.
+- `previous: () => void` - a function to go to the previous page.
+- `next: () => void` - a function to go to the next page.
+- `last: () => void` - a function to go to the last page.
+- `canPrevious: boolean` - indicates weither the navigation to the previous page is possible.
+- `canNext: boolean` - indicates weither the navigation to the next page is possible.

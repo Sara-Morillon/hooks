@@ -1,10 +1,10 @@
 # useForm
 
-`useForm` provides helpers to handle forms.
+`useForm` offers helpers to handle forms.
 
 ## Example
 
-```typescript
+```tsx
 import { useForm } from '@saramorillon/hooks'
 
 type Data {
@@ -35,17 +35,17 @@ useForm<T>(props: IFormProps<T>): IForm<T>
 
 ### Arguments
 
-`save: (values: T) => void` - The save action. **:warning: Must be memoized to avoid potential infinite loops.**
+`save: (values: T) => void` - the save action. **:warning: Must be memoized to avoid potential infinite loops.**
 
-`initialValues: T` - The initial values.
+`initialValues: T` - the initial values.
 
 ### Returns
 
 An object containing:
 
-- `values: T` - the form values
-- `onChange: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form
-- `submit: (e: FormEvent) => void` - a function for submitting a form
-- `reset: () => void` - a function to reset the form to its initial values
-- `loading: boolean` - indicates when the form is being submitted
-- `error?: unknown` - contains a potential error thrown by the save function
+- `values: T` - the form values.
+- `onChange: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form.
+- `submit: (e: FormEvent) => void` - a function for submitting a form.
+- `reset: () => void` - a function to reset the form to its initial values.
+- `loading: boolean` - indicates when the form is being submitted.
+- `error?: unknown` - contains a potential error thrown by the save function.

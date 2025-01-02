@@ -6,7 +6,7 @@ It also changes document root color-scheme accordingly.
 
 ## Example
 
-```typescript
+```tsx
 import { useTheme } from '@saramorillon/hooks'
 
 function MyComponent() {
@@ -27,4 +27,4 @@ None
 
 ### Returns
 
-`Theme` - The theme ("light" or "dark").
+`Theme` - the theme ("light" or "dark").

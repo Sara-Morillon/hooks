@@ -4,11 +4,11 @@
 
 ## Example
 
-```typescript
+```tsx
 import { useDebounce } from '@saramorillon/hooks'
 
 function fetchData(): Promise<string> {
-  return new Promise(resolve => setTimeout(() => resolve('value'), 200))
+  return new Promise((resolve) => setTimeout(() => resolve('value'), 200))
 }
 
 function MyComponent() {
@@ -37,11 +37,10 @@ useDebounce<T>(value: T, delay?: number): T
 
 ### Arguments
 
-`value: T` - The value to debounce, can be a function.
+`value: T` - the value to debounce, can be a function.
 
-`delay?: number` - The delay of the debounce in ms, default to 500ms.
-
+`delay?: number` - the delay of the debounce in ms, default to 500ms.
 
 ### Returns
 
-`T` - The debounced value or function.
+`T` - the debounced value or function.

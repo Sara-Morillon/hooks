@@ -1,10 +1,10 @@
 # useDrag/useDrop
 
-`useDrag` provides helpers to help dragging elements.
+`useDrag` offers helpers to drag and drop elements.
 
 ## Example
 
-```typescript
+```tsx
 import { useDrag, useDrop } from '@saramorillon/hooks'
 
 function MyList() {
@@ -54,18 +54,18 @@ useDrop(onDrop: (source: string) => void): [boolean, IDropEvents]
 
 ### Arguments
 
-`source: string` - The source element. Don't forget to memoize stringified JSON objects.
+`source: string` - the source element. Don't forget to memoize stringified JSON objects.
 
-`onDrop: (source: string) => void` - The drop action.
+`onDrop: (source: string) => void` - the drop action.
 
 ### Returns
 
 An array containing:
 
-- `isDragged: boolean` - indicates weither the item is currently dragged
-- `IDragEvents` - an object containing events to attach to the draggable item
+- `isDragged: boolean` - indicates weither the item is currently dragged.
+- `IDragEvents` - an object containing events to attach to the draggable item.
 
 An array containing:
 
-- `isOver: boolean` - indicates weither a dragged item is currently over the target
-- `IDropEvents` - an object containing events to attach to the target
+- `isOver: boolean` - indicates weither a dragged item is currently over the target.
+- `IDropEvents` - an object containing events to attach to the target.
