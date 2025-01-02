@@ -1,6 +1,6 @@
 # useDrag/useDrop
 
-`useDrag` offers helpers to drag and drop elements.
+`useDrag` and `useDrop` offer helpers to drag and drop elements.
 
 ## Example
 
@@ -48,8 +48,8 @@ function MyListItem({ item }: { item: string }) {
 ## API
 
 ```typescript
-useDrag(source: string): [boolean, IDragEvents]
-useDrop(onDrop: (source: string) => void): [boolean, IDropEvents]
+useDrag(source: string): [boolean, IDragEvents];
+useDrop(onDrop: (source: string) => void): [boolean, IDropEvents];
 ```
 
 ### Arguments

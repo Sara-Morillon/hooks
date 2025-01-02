@@ -39,7 +39,7 @@ None
 
 `IDialog` - An object containing:
 
-- `ref: RefObject<HTMLDialogElement>` - the dialog ref
-- `visible: boolean` - indicates weither the dialog is visible or not
-- `show: () => void` - a function to show the dialog
-- `hide: () => void` - a function to hide the dialog
+- `ref: RefObject<HTMLDialogElement>` - the dialog ref.
+- `visible: boolean` - indicates weither the dialog is visible or not.
+- `show: () => void` - a function to show the dialog.
+- `hide: () => void` - a function to hide the dialog.

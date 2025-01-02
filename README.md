@@ -23,7 +23,7 @@ yarn add @saramorillon/hooks
 - [usePagination](docs/usePagination.md)
 - [useForm](docs/useForm.md)
 - [useCopy](docs/useCopy.md)
-- [useDrag/useDrop](docs/useDrag_useDrop.md)
+- [useDrag/useDrop](docs/useDnd.md)
 - [useDialog](docs/useDialog.md)
 - [useDebounce](docs/useDebounce.md)
 - [useTableState](docs/useTableState.md)

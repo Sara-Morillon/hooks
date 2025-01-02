@@ -2,7 +2,7 @@
 
 `usePaginationState` offers an easy way to provide local pagination to a set of remote data.
 
-_:info: Pagination is 0 based._
+_:information_source: Pagination is 0 based._
 
 ## Example
 

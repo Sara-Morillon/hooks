@@ -2,7 +2,7 @@
 
 `useTable` offers an easy way to apply local filters, sort and pagination to a set of local data.
 
-_:info: Pagination is 0 based._
+_:information_source: Pagination is 0 based._
 
 ## Example
 
