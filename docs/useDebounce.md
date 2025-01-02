@@ -7,25 +7,16 @@
 ```tsx
 import { useDebounce } from '@saramorillon/hooks'
 
-function fetchData(): Promise<string> {
-  return new Promise((resolve) => setTimeout(() => resolve('value'), 200))
-}
-
 function MyComponent() {
-  const debouncedFetch = useDebounce(fetchData)
+  const [search, setSearch] = useState('')
+  const fetch = useCallback(() => fetchData(search), [search])
+  const debouncedFetch = useDebounce(fetch)
 
-  return (
-    <>
-      <button onClick={show}>Show dialog</button>
-      <dialog ref={ref} onClick={hide}>
-        {visible && (
-          <div onClick={(e) => e.stopPropagation()}>
-            <button onClick={hide}>Hide dialog</button>
-          </div>
-        )}
-      </dialog>
-    </>
-  )
+  useEffect(() => {
+    debouncedFetch()
+  }, [debouncedFetch])
+
+  return <input value={search} onChange={(e) => setSearch(e.target.value)} />
 }
 ```
 
