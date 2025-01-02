@@ -1,37 +1,39 @@
 import { useMemo } from 'react'
-import { type IFilter, type IFilterFunctions, useFilterState, useFilteredRows } from './useFilter.js'
-import { type IPaginate, usePaginatedRows, usePaginationState } from './usePaginate.js'
-import { type ISort, useSortState, useSortedRows } from './useSort.js'
+import { type IFilterFunctions, type IFilterState, type Unknown, useFilterState, useFilteredRows } from './useFilter.js'
+import { type IPaginationState, usePaginatedRows, usePaginationState } from './usePaginate.js'
+import { type ISortState, useSortState, useSortedRows } from './useSort.js'
 
-export type IState<T, F extends IFilter<T> = T> = {
-  filter: Partial<F>
-  sort: ISort<T>[]
+export type IState<T, F extends Unknown<T> = T> = {
+  filter: IFilterState<T, F>['state']
+  sort: ISortState<T>['state']
   sortDir: {
     [key in keyof T]?: 'asc' | 'desc'
   }
-  pagination: IPaginate
+  pagination: IPaginationState['state']
 }
 
-export type IInitialState<T, F extends IFilter<T> = T> = Partial<Omit<IState<T, F>, 'sortDir'>>
+export type IInitialState<T, F extends Unknown<T> = T> = Partial<Omit<IState<T, F>, 'sortDir'>>
 
-export interface ITableState<T, F extends IFilter<T> = T> {
+export interface ITableState<T, F extends Unknown<T> = T> {
   state: IState<T, F>
-  filter: <K extends keyof T>(column: K, value: F[K]) => void
-  sort: (column: keyof T, dir?: 'asc' | 'desc') => void
-  goTo: (index: number) => void
-  setLimit: (limit: number) => void
+  filter: IFilterState<T, F>['filter']
+  sort: ISortState<T>['sort']
+  goTo: IPaginationState['goTo']
+  setLimit: IPaginationState['setLimit']
 }
 
-export interface ITable<T, F extends IFilter<T> = T> extends ITableState<T, F> {
+export interface ITableRows<T> {
   rows: T[]
   total: number
 }
 
-export interface ITableOptions<T, F extends IFilter<T> = T> {
+export interface ITable<T, F extends Unknown<T> = T> extends ITableState<T, F>, ITableRows<T> {}
+
+export interface ITableOptions<T, F extends Unknown<T> = T> {
   filterFunctions: IFilterFunctions<T, F>
 }
 
-export function useTableState<T, F extends IFilter<T> = T>(initialState?: IInitialState<T, F>): ITableState<T, F> {
+export function useTableState<T, F extends Unknown<T> = T>(initialState?: IInitialState<T, F>): ITableState<T, F> {
   const { state: filterState, filter } = useFilterState<T, F>(initialState?.filter)
   const { state: sortState, sort } = useSortState<T>(initialState?.sort)
   const { state: paginationState, goTo, setLimit } = usePaginationState(initialState?.pagination)
@@ -45,7 +47,7 @@ export function useTableState<T, F extends IFilter<T> = T>(initialState?: IIniti
     }
 
     for (const sort of state.sort) {
-      state.sortDir[sort.column] = sort.dir
+      state.sortDir[sort.field] = sort.dir
     }
 
     return state
@@ -54,19 +56,19 @@ export function useTableState<T, F extends IFilter<T> = T>(initialState?: IIniti
   return useMemo(() => ({ state, filter, sort, goTo, setLimit }), [state, filter, sort, goTo, setLimit])
 }
 
-export function useTableRows<T, F extends IFilter<T> = T>(
+export function useTableRows<T, F extends Unknown<T> = T>(
   data: T[],
-  state: IInitialState<T, F>,
+  state?: IInitialState<T, F>,
   options?: ITableOptions<T, F>,
-) {
-  const filteredRows = useFilteredRows<T, F>(data, state.filter, options?.filterFunctions)
-  const sortedRows = useSortedRows<T>(filteredRows, state.sort)
-  const rows = usePaginatedRows(sortedRows, state.pagination)
+): ITableRows<T> {
+  const filteredRows = useFilteredRows<T, F>(data, state?.filter, options?.filterFunctions)
+  const sortedRows = useSortedRows<T>(filteredRows, state?.sort)
+  const rows = usePaginatedRows(sortedRows, state?.pagination)
 
   return useMemo(() => ({ rows, total: filteredRows.length }), [rows, filteredRows])
 }
 
-export function useTable<T, F extends IFilter<T> = T>(
+export function useTable<T, F extends Unknown<T> = T>(
   data: T[],
   initialState?: IInitialState<T, F>,
   options?: ITableOptions<T, F>,

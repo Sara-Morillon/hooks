@@ -1,6 +1,6 @@
 import { type DragEvent, useCallback, useMemo, useState } from 'react'
 
-interface IDragEvents {
+export interface IDragEvents {
   onDragStart: (e: DragEvent) => void
   onDragEnd: (e: DragEvent) => void
 }
@@ -24,7 +24,7 @@ export function useDrag(source: string): [boolean, IDragEvents] {
   return useMemo(() => [isDragged, { onDragStart, onDragEnd }], [isDragged, onDragStart, onDragEnd])
 }
 
-interface IDropEvents {
+export interface IDropEvents {
   onDragOver: (e: DragEvent) => void
   onDragLeave: (e: DragEvent) => void
   onDrop: (e: DragEvent) => void

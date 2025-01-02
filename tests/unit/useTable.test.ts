@@ -6,13 +6,13 @@ describe('useTableState', () => {
   it('should return initial table state', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: [{ field: 'age', dir: 'desc' }],
       pagination: { index: 2, limit: 5 },
     }
     const { result } = renderHook(() => useTableState<IData>(state))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: [{ field: 'age', dir: 'desc' }],
       sortDir: { age: 'desc' },
       pagination: { index: 2, limit: 5 },
     })
@@ -26,7 +26,7 @@ describe('useTableState', () => {
     act(() => result.current.goTo(2))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: [{ field: 'age', dir: 'desc' }],
       sortDir: { age: 'desc' },
       pagination: { index: 2, limit: 5 },
     })
@@ -37,7 +37,7 @@ describe('useTableRows', () => {
   it('should return filtered, sorted and paginated rows', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: [{ field: 'age', dir: 'desc' }],
       pagination: { index: 2, limit: 5 },
     }
     const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
@@ -70,7 +70,7 @@ describe('useTable', () => {
     act(() => result.current.goTo(2))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: [{ field: 'age', dir: 'desc' }],
       sortDir: { age: 'desc' },
       pagination: { index: 2, limit: 5 },
     })
@@ -79,7 +79,7 @@ describe('useTable', () => {
   it('should return filtered, sorted and paginated rows', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
-      sort: [{ column: 'age', dir: 'desc' }],
+      sort: [{ field: 'age', dir: 'desc' }],
       pagination: { index: 2, limit: 5 },
     }
     const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }

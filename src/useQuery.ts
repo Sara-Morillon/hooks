@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-interface IQueryOptions<T> {
+export interface IQueryOptions<T> {
   autoRun?: boolean
   defaultValue?: T
 }
 
-interface IQueryResult<T> {
+export interface IQueryResult<T> {
   execute: () => Promise<void>
   loading: boolean
   error?: unknown
