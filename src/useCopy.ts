@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 interface ICopyStatus {
+  authorized: boolean
+  copy: (data: string) => void
   loading: boolean
   error?: unknown
 }
 
-export function useCopy(): [boolean, ICopyStatus, (data: string) => void] {
+export function useCopy(): ICopyStatus {
   const [authorized, setAuthorized] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -30,5 +32,5 @@ export function useCopy(): [boolean, ICopyStatus, (data: string) => void] {
     }
   }, [])
 
-  return useMemo(() => [authorized, { loading, error }, copy], [authorized, loading, error, copy])
+  return useMemo(() => ({ authorized, loading, error, copy }), [authorized, loading, error, copy])
 }

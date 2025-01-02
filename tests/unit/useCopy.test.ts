@@ -17,41 +17,41 @@ describe('useCopy', () => {
     vi.spyOn(window.navigator, 'userAgent', 'get').mockReturnValue('Firefox')
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    expect(result.current[0]).toBe(true)
+    expect(result.current.authorized).toBe(true)
   })
 
   it('should be authorized if user agent is not Firefox and copy permissions state is granted', async () => {
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    expect(result.current[0]).toBe(true)
+    expect(result.current.authorized).toBe(true)
   })
 
   it('should be authorized if user agent is not Firefox and copy permissions state is prompt', async () => {
     vi.spyOn(navigator.permissions, 'query').mockResolvedValue({ state: 'prompt' } as unknown as PermissionStatus)
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    expect(result.current[0]).toBe(true)
+    expect(result.current.authorized).toBe(true)
   })
 
   it('should not be authorized if user agent is not Firefox and copy permissions state is denied', async () => {
     vi.spyOn(navigator.permissions, 'query').mockResolvedValue({ state: 'denied' } as unknown as PermissionStatus)
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    expect(result.current[0]).toBe(false)
+    expect(result.current.authorized).toBe(false)
   })
 
   it('should be loading when copying', async () => {
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    act(() => result.current[2]('data'))
-    expect(result.current[1].loading).toBe(true)
+    act(() => result.current.copy('data'))
+    expect(result.current.loading).toBe(true)
     await flushPromises()
   })
 
   it('should execute copy', async () => {
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    act(() => result.current[2]('data'))
+    act(() => result.current.copy('data'))
     await flushPromises()
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('data')
   })
@@ -60,8 +60,8 @@ describe('useCopy', () => {
     vi.spyOn(navigator.clipboard, 'writeText').mockRejectedValue(new Error())
     const { result } = renderHook(() => useCopy())
     await flushPromises()
-    act(() => result.current[2]('data'))
+    act(() => result.current.copy('data'))
     await flushPromises()
-    expect(result.current[1].error).toEqual(new Error())
+    expect(result.current.error).toEqual(new Error())
   })
 })
