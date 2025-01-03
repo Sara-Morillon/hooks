@@ -35,7 +35,7 @@ export function usePaginatedRows<T>(data: T[], pagination?: IPaginationInfo): T[
       return data
     }
 
-    return data.slice(pagination.index * pagination.limit, pagination.index * pagination.limit)
+    return data.slice(pagination.index * pagination.limit, (pagination.index + 1) * pagination.limit)
   }, [data, pagination])
 }
 

@@ -5,20 +5,20 @@ import { mockTableData } from '../mock.js'
 describe('usePaginationState', () => {
   it('should return default index and limit', () => {
     const { result } = renderHook(() => usePaginationState())
-    expect(result.current.state.index).toBe(1)
+    expect(result.current.state.index).toBe(0)
     expect(result.current.state.limit).toBe(10)
   })
 
   it('should return initial index and limit', () => {
-    const { result } = renderHook(() => usePaginationState({ index: 2, limit: 5 }))
-    expect(result.current.state.index).toBe(2)
+    const { result } = renderHook(() => usePaginationState({ index: 1, limit: 5 }))
+    expect(result.current.state.index).toBe(1)
     expect(result.current.state.limit).toBe(5)
   })
 
   it('should change index', () => {
     const { result } = renderHook(() => usePaginationState())
-    act(() => result.current.goTo(2))
-    expect(result.current.state.index).toBe(2)
+    act(() => result.current.goTo(1))
+    expect(result.current.state.index).toBe(1)
   })
 
   it('should change limit', () => {
@@ -35,7 +35,7 @@ describe('usePaginatedRows', () => {
   })
 
   it('should return subset of rows', () => {
-    const { result } = renderHook(() => usePaginatedRows(mockTableData(), { index: 2, limit: 7 }))
+    const { result } = renderHook(() => usePaginatedRows(mockTableData(), { index: 1, limit: 7 }))
     expect(result.current).toEqual([
       { name: 'Deandre Vu', age: 32 },
       { name: 'Kimora Higgins', age: 38 },
@@ -51,20 +51,20 @@ describe('usePaginatedRows', () => {
 describe('usePaginate', () => {
   it('should return default index and limit', () => {
     const { result } = renderHook(() => usePaginate(mockTableData()))
-    expect(result.current.state.index).toBe(1)
+    expect(result.current.state.index).toBe(0)
     expect(result.current.state.limit).toBe(10)
   })
 
   it('should return initial index and limit', () => {
-    const { result } = renderHook(() => usePaginate(mockTableData(), { index: 2, limit: 5 }))
-    expect(result.current.state.index).toBe(2)
+    const { result } = renderHook(() => usePaginate(mockTableData(), { index: 1, limit: 5 }))
+    expect(result.current.state.index).toBe(1)
     expect(result.current.state.limit).toBe(5)
   })
 
   it('should change index', () => {
     const { result } = renderHook(() => usePaginate(mockTableData()))
-    act(() => result.current.goTo(2))
-    expect(result.current.state.index).toBe(2)
+    act(() => result.current.goTo(1))
+    expect(result.current.state.index).toBe(1)
   })
 
   it('should change limit', () => {
@@ -74,7 +74,7 @@ describe('usePaginate', () => {
   })
 
   it('should return subset of rows', () => {
-    const { result } = renderHook(() => usePaginate(mockTableData(), { index: 2, limit: 7 }))
+    const { result } = renderHook(() => usePaginate(mockTableData(), { index: 1, limit: 7 }))
     expect(result.current.rows).toEqual([
       { name: 'Deandre Vu', age: 32 },
       { name: 'Kimora Higgins', age: 38 },
