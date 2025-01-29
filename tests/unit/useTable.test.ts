@@ -7,14 +7,14 @@ describe('useTableState', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
       sort: [{ field: 'age', dir: 'desc' }],
-      pagination: { index: 1, limit: 5 },
+      pagination: { index: 2, limit: 5 },
     }
     const { result } = renderHook(() => useTableState<IData>(state))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
       sort: [{ field: 'age', dir: 'desc' }],
       sortDir: { age: 'desc' },
-      pagination: { index: 1, limit: 5 },
+      pagination: { index: 2, limit: 5 },
     })
   })
 
@@ -23,12 +23,12 @@ describe('useTableState', () => {
     act(() => result.current.filter('name', 'a'))
     act(() => result.current.sort('age', 'desc'))
     act(() => result.current.setLimit(5))
-    act(() => result.current.goTo(1))
+    act(() => result.current.goTo(2))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
       sort: [{ field: 'age', dir: 'desc' }],
       sortDir: { age: 'desc' },
-      pagination: { index: 1, limit: 5 },
+      pagination: { index: 2, limit: 5 },
     })
   })
 })
@@ -38,7 +38,7 @@ describe('useTableRows', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
       sort: [{ field: 'age', dir: 'desc' }],
-      pagination: { index: 1, limit: 5 },
+      pagination: { index: 2, limit: 5 },
     }
     const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
     const { result } = renderHook(() => useTableRows(mockTableData(), state, options))
@@ -67,12 +67,12 @@ describe('useTable', () => {
     act(() => result.current.filter('name', 'a'))
     act(() => result.current.sort('age', 'desc'))
     act(() => result.current.setLimit(5))
-    act(() => result.current.goTo(1))
+    act(() => result.current.goTo(2))
     expect(result.current.state).toEqual({
       filter: { name: 'a' },
       sort: [{ field: 'age', dir: 'desc' }],
       sortDir: { age: 'desc' },
-      pagination: { index: 1, limit: 5 },
+      pagination: { index: 2, limit: 5 },
     })
   })
 
@@ -80,7 +80,7 @@ describe('useTable', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
       sort: [{ field: 'age', dir: 'desc' }],
-      pagination: { index: 1, limit: 5 },
+      pagination: { index: 2, limit: 5 },
     }
     const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
     const { result } = renderHook(() => useTable(mockTableData(), state, options))

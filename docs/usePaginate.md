@@ -2,7 +2,7 @@
 
 `usePaginate` offers an easy way to apply local pagination to a set of local data.
 
-_:information_source: Pagination is 0 based._
+_:information_source: Pagination is 1-based._
 
 ## Example
 
@@ -60,7 +60,7 @@ usePaginate<T>(data: T[], initialPagination?: IPaginationInfo): IPaginated<T>
 
 `initialPagination?: IPaginationInfo` - an object containing:
 
-- `index: number` - the initial page index, default to 0.
+- `index: number` - the initial page index, default to 1.
 - `limit: number` - the initial page size, default to 10.
 
 ### Returns

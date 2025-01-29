@@ -2,7 +2,7 @@
 
 `usePaginationState` offers an easy way to provide local pagination to a set of remote data.
 
-_:information_source: Pagination is 0 based._
+_:information_source: Pagination is 1-based._
 
 ## Example
 
@@ -54,7 +54,7 @@ usePaginationState(initialPagination?: IPaginationInfo): IPaginationState
 
 `initialPagination?: IPaginationInfo` - an object containing:
 
-- `index: number` - the initial page index, default to 0.
+- `index: number` - the initial page index, default to 1.
 - `limit: number` - the initial page size, default to 10.
 
 ### Returns
