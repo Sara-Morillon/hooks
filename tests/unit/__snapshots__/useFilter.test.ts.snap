@@ -3,10 +3,20 @@
 exports[`useFilter > should filter rows with custom filter function 1`] = `
 [
   {
+    "address": {
+      "city": "Little Woolstone",
+      "number": 6,
+      "street": "Overton Circle",
+    },
     "age": 39,
     "name": "Alexis West",
   },
   {
+    "address": {
+      "city": "Winslade",
+      "number": 42,
+      "street": "Folkestone Road",
+    },
     "age": 35,
     "name": "Jaxen Smith",
   },
@@ -16,6 +26,11 @@ exports[`useFilter > should filter rows with custom filter function 1`] = `
 exports[`useFilter > should filter rows with default filter function 1`] = `
 [
   {
+    "address": {
+      "city": "Druimkinnerras",
+      "number": 47,
+      "street": "Crescent Avenue",
+    },
     "age": 30,
     "name": "Zola Ray",
   },
@@ -25,10 +40,20 @@ exports[`useFilter > should filter rows with default filter function 1`] = `
 exports[`useFilteredRows > should filter rows with custom filter function 1`] = `
 [
   {
+    "address": {
+      "city": "Little Woolstone",
+      "number": 6,
+      "street": "Overton Circle",
+    },
     "age": 39,
     "name": "Alexis West",
   },
   {
+    "address": {
+      "city": "Winslade",
+      "number": 42,
+      "street": "Folkestone Road",
+    },
     "age": 35,
     "name": "Jaxen Smith",
   },
@@ -38,6 +63,11 @@ exports[`useFilteredRows > should filter rows with custom filter function 1`] = 
 exports[`useFilteredRows > should filter rows with default filter function 1`] = `
 [
   {
+    "address": {
+      "city": "Druimkinnerras",
+      "number": 47,
+      "street": "Crescent Avenue",
+    },
     "age": 30,
     "name": "Zola Ray",
   },
