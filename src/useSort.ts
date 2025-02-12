@@ -5,24 +5,24 @@ export type ISortFunctions<T, F extends Unknown<T> = T> = {
   [field in keyof F]?: (rowA: T, rowB: T) => number
 }
 
-export interface ISortItem<T> {
-  field: keyof T
+export interface ISortItem<T, F extends Unknown<T> = T> {
+  field: keyof F
   dir: 'asc' | 'desc'
 }
 
-export interface ISortState<T> {
-  state: ISortItem<T>[]
-  sort: (field: keyof T, dir?: 'asc' | 'desc') => void
+export interface ISortState<T, F extends Unknown<T> = T> {
+  state: ISortItem<T, F>[]
+  sort: (field: keyof F, dir?: 'asc' | 'desc') => void
 }
 
-export interface ISorted<T> extends ISortState<T> {
+export interface ISorted<T, F extends Unknown<T> = T> extends ISortState<T, F> {
   rows: T[]
 }
 
-export function useSortState<T>(initialSort: ISortItem<T>[] = []): ISortState<T> {
-  const [state, setState] = useState<ISortItem<T>[]>(initialSort)
+export function useSortState<T, F extends Unknown<T> = T>(initialSort: ISortItem<F>[] = []): ISortState<T, F> {
+  const [state, setState] = useState<ISortItem<T, F>[]>(initialSort)
 
-  const sort = useCallback((field: keyof T, dir?: 'asc' | 'desc') => {
+  const sort = useCallback((field: keyof F, dir?: 'asc' | 'desc') => {
     setState((state) => {
       const newState = state.filter((s) => s.field !== field)
       if (dir) {
@@ -37,7 +37,7 @@ export function useSortState<T>(initialSort: ISortItem<T>[] = []): ISortState<T>
 
 export function useSortedRows<T, F extends Unknown<T> = T>(
   data: T[],
-  sort?: ISortItem<T>[],
+  sort?: ISortItem<T, F>[],
   sortFunctions?: ISortFunctions<T, F>,
 ): T[] {
   return useMemo(() => {
@@ -51,10 +51,12 @@ export function useSortedRows<T, F extends Unknown<T> = T>(
         if (sortFunction) {
           return sortFunction(rowA, rowB)
         }
-        if (rowA[field] < rowB[field]) {
+        const valueA = rowA[field as keyof T]
+        const valueB = rowB[field as keyof T]
+        if (valueA < valueB) {
           return dir === 'asc' ? -1 : 1
         }
-        if (rowA[field] > rowB[field]) {
+        if (valueA > valueB) {
           return dir === 'asc' ? 1 : -1
         }
       }
@@ -65,10 +67,10 @@ export function useSortedRows<T, F extends Unknown<T> = T>(
 
 export function useSort<T, F extends Unknown<T> = T>(
   data: T[],
-  initialSort: ISortItem<T>[] = [],
+  initialSort: ISortItem<T, F>[] = [],
   sortFunctions?: ISortFunctions<T, F>,
-): ISorted<T> {
-  const { state, sort } = useSortState<T>(initialSort)
+): ISorted<T, F> {
+  const { state, sort } = useSortState<T, F>(initialSort)
   const rows = useSortedRows(data, state, sortFunctions)
 
   return useMemo(() => ({ rows, state, sort }), [rows, state, sort])
