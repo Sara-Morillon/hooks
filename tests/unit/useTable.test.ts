@@ -40,7 +40,10 @@ describe('useTableRows', () => {
       sort: [{ field: 'age', dir: 'desc' }],
       pagination: { index: 2, limit: 5 },
     }
-    const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
+    const options: ITableOptions<IData> = {
+      filterFunctions: { name: (row, value) => row.name.includes(value) },
+      sortFunctions: { name: (rowA, rowB) => rowA.name.localeCompare(rowB.name) },
+    }
     const { result } = renderHook(() => useTableRows(mockTableData(), state, options))
     expect(result.current.rows).toMatchSnapshot()
   })
@@ -49,7 +52,10 @@ describe('useTableRows', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
     }
-    const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
+    const options: ITableOptions<IData> = {
+      filterFunctions: { name: (row, value) => row.name.includes(value) },
+      sortFunctions: { name: (rowA, rowB) => rowA.name.localeCompare(rowB.name) },
+    }
     const { result } = renderHook(() => useTableRows(mockTableData(), state, options))
     expect(result.current.total).toBe(13)
   })
@@ -76,7 +82,10 @@ describe('useTable', () => {
       sort: [{ field: 'age', dir: 'desc' }],
       pagination: { index: 2, limit: 5 },
     }
-    const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
+    const options: ITableOptions<IData> = {
+      filterFunctions: { name: (row, value) => row.name.includes(value) },
+      sortFunctions: { name: (rowA, rowB) => rowA.name.localeCompare(rowB.name) },
+    }
     const { result } = renderHook(() => useTable(mockTableData(), state, options))
     expect(result.current.rows).toMatchSnapshot()
   })
@@ -85,7 +94,10 @@ describe('useTable', () => {
     const state: IInitialState<IData> = {
       filter: { name: 'a' },
     }
-    const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
+    const options: ITableOptions<IData> = {
+      filterFunctions: { name: (row, value) => row.name.includes(value) },
+      sortFunctions: { name: (rowA, rowB) => rowA.name.localeCompare(rowB.name) },
+    }
     const { result } = renderHook(() => useTable(mockTableData(), state, options))
     expect(result.current.total).toBe(13)
   })

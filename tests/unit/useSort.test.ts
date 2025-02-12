@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { useSort, useSortState, useSortedRows } from '../../src/useSort.js'
+import { type ISortFunctions, useSort, useSortState, useSortedRows } from '../../src/useSort.js'
 import { type IData, mockTableData } from '../mock.js'
 
 describe('useSortState', () => {
@@ -63,6 +63,16 @@ describe('useSortedRows', () => {
     )
     expect(result.current).toMatchSnapshot()
   })
+
+  it('should sort rows with custom sort function', () => {
+    const sortFunctions: ISortFunctions<IData> = {
+      address: (rowA, rowB) => rowA.address.city.localeCompare(rowB.address.city),
+    }
+    const { result } = renderHook(() =>
+      useSortedRows(mockTableData(), [{ field: 'address', dir: 'asc' }], sortFunctions),
+    )
+    expect(result.current).toMatchSnapshot()
+  })
 })
 
 describe('useSort', () => {
@@ -118,5 +128,13 @@ describe('useSort', () => {
       ]),
     )
     expect(result.current.rows).toMatchSnapshot()
+  })
+
+  it('should sort rows with custom sort function', () => {
+    const sortFunctions: ISortFunctions<IData> = {
+      address: (rowA, rowB) => rowA.address.city.localeCompare(rowB.address.city),
+    }
+    const { result } = renderHook(() => useSort(mockTableData(), [{ field: 'address', dir: 'asc' }], sortFunctions))
+    expect(result.current).toMatchSnapshot()
   })
 })

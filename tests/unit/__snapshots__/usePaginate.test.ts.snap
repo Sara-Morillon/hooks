@@ -3,30 +3,65 @@
 exports[`usePaginate > should return subset of rows 1`] = `
 [
   {
+    "address": {
+      "city": "Haslington",
+      "number": 12,
+      "street": "Warner Close",
+    },
     "age": 32,
     "name": "Deandre Vu",
   },
   {
+    "address": {
+      "city": "Sandaig",
+      "number": 97,
+      "street": "Wade Lane",
+    },
     "age": 38,
     "name": "Kimora Higgins",
   },
   {
+    "address": {
+      "city": "Gartavaich",
+      "number": 11,
+      "street": "Guildry Street",
+    },
     "age": 30,
     "name": "Sterling Pugh",
   },
   {
+    "address": {
+      "city": "Dowland",
+      "number": 49,
+      "street": "North Promenade",
+    },
     "age": 31,
     "name": "Landry Pineda",
   },
   {
+    "address": {
+      "city": "Beckley",
+      "number": 19,
+      "street": "Annfield Rd",
+    },
     "age": 39,
     "name": "Gerardo Pearson",
   },
   {
+    "address": {
+      "city": "Malling",
+      "number": 96,
+      "street": "Cunnery Rd",
+    },
     "age": 34,
     "name": "Kiara Nava",
   },
   {
+    "address": {
+      "city": "Lynemore",
+      "number": 31,
+      "street": "South Crescent",
+    },
     "age": 35,
     "name": "Stefan Hart",
   },
@@ -36,30 +71,65 @@ exports[`usePaginate > should return subset of rows 1`] = `
 exports[`usePaginatedRows > should return subset of rows 1`] = `
 [
   {
+    "address": {
+      "city": "Haslington",
+      "number": 12,
+      "street": "Warner Close",
+    },
     "age": 32,
     "name": "Deandre Vu",
   },
   {
+    "address": {
+      "city": "Sandaig",
+      "number": 97,
+      "street": "Wade Lane",
+    },
     "age": 38,
     "name": "Kimora Higgins",
   },
   {
+    "address": {
+      "city": "Gartavaich",
+      "number": 11,
+      "street": "Guildry Street",
+    },
     "age": 30,
     "name": "Sterling Pugh",
   },
   {
+    "address": {
+      "city": "Dowland",
+      "number": 49,
+      "street": "North Promenade",
+    },
     "age": 31,
     "name": "Landry Pineda",
   },
   {
+    "address": {
+      "city": "Beckley",
+      "number": 19,
+      "street": "Annfield Rd",
+    },
     "age": 39,
     "name": "Gerardo Pearson",
   },
   {
+    "address": {
+      "city": "Malling",
+      "number": 96,
+      "street": "Cunnery Rd",
+    },
     "age": 34,
     "name": "Kiara Nava",
   },
   {
+    "address": {
+      "city": "Lynemore",
+      "number": 31,
+      "street": "South Crescent",
+    },
     "age": 35,
     "name": "Stefan Hart",
   },

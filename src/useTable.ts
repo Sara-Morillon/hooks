@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { type IFilterFunctions, type IFilterState, type Unknown, useFilterState, useFilteredRows } from './useFilter.js'
 import { type IPaginationState, usePaginatedRows, usePaginationState } from './usePaginate.js'
-import { type ISortState, useSortState, useSortedRows } from './useSort.js'
+import { type ISortFunctions, type ISortState, useSortState, useSortedRows } from './useSort.js'
 
 export type IState<T, F extends Unknown<T> = T> = {
   filter: IFilterState<T, F>['state']
@@ -30,7 +30,8 @@ export interface ITableRows<T> {
 export interface ITable<T, F extends Unknown<T> = T> extends ITableState<T, F>, ITableRows<T> {}
 
 export interface ITableOptions<T, F extends Unknown<T> = T> {
-  filterFunctions: IFilterFunctions<T, F>
+  filterFunctions?: IFilterFunctions<T, F>
+  sortFunctions?: ISortFunctions<T, F>
 }
 
 export function useTableState<T, F extends Unknown<T> = T>(initialState?: IInitialState<T, F>): ITableState<T, F> {
@@ -62,7 +63,7 @@ export function useTableRows<T, F extends Unknown<T> = T>(
   options?: ITableOptions<T, F>,
 ): ITableRows<T> {
   const filteredRows = useFilteredRows<T, F>(data, state?.filter, options?.filterFunctions)
-  const sortedRows = useSortedRows<T>(filteredRows, state?.sort)
+  const sortedRows = useSortedRows<T>(filteredRows, state?.sort, options?.sortFunctions)
   const rows = usePaginatedRows(sortedRows, state?.pagination)
 
   return useMemo(() => ({ rows, total: filteredRows.length }), [rows, filteredRows])

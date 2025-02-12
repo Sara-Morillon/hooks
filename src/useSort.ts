@@ -1,4 +1,9 @@
 import { useCallback, useMemo, useState } from 'react'
+import type { Unknown } from './useFilter.js'
+
+export type ISortFunctions<T, F extends Unknown<T> = T> = {
+  [field in keyof F]?: (rowA: T, rowB: T) => number
+}
 
 export interface ISortItem<T> {
   field: keyof T
@@ -30,7 +35,11 @@ export function useSortState<T>(initialSort: ISortItem<T>[] = []): ISortState<T>
   return useMemo(() => ({ state, sort }), [state, sort])
 }
 
-export function useSortedRows<T>(data: T[], sort?: ISortItem<T>[]): T[] {
+export function useSortedRows<T, F extends Unknown<T> = T>(
+  data: T[],
+  sort?: ISortItem<T>[],
+  sortFunctions?: ISortFunctions<T, F>,
+): T[] {
   return useMemo(() => {
     if (!sort) {
       return data
@@ -38,6 +47,10 @@ export function useSortedRows<T>(data: T[], sort?: ISortItem<T>[]): T[] {
 
     return data.toSorted((rowA: T, rowB: T) => {
       for (const { field, dir } of sort) {
+        const sortFunction = sortFunctions?.[field]
+        if (sortFunction) {
+          return sortFunction(rowA, rowB)
+        }
         if (rowA[field] < rowB[field]) {
           return dir === 'asc' ? -1 : 1
         }
@@ -47,12 +60,16 @@ export function useSortedRows<T>(data: T[], sort?: ISortItem<T>[]): T[] {
       }
       return 0
     })
-  }, [data, sort])
+  }, [data, sort, sortFunctions])
 }
 
-export function useSort<T>(data: T[], initialSort: ISortItem<T>[] = []): ISorted<T> {
+export function useSort<T, F extends Unknown<T> = T>(
+  data: T[],
+  initialSort: ISortItem<T>[] = [],
+  sortFunctions?: ISortFunctions<T, F>,
+): ISorted<T> {
   const { state, sort } = useSortState<T>(initialSort)
-  const rows = useSortedRows(data, state)
+  const rows = useSortedRows(data, state, sortFunctions)
 
   return useMemo(() => ({ rows, state, sort }), [rows, state, sort])
 }

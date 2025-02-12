@@ -3,22 +3,47 @@
 exports[`useTable > should return filtered, sorted and paginated rows 1`] = `
 [
   {
+    "address": {
+      "city": "Frostenden",
+      "number": 13,
+      "street": "Sandyhill Rd",
+    },
     "age": 37,
     "name": "Annabella Vargas",
   },
   {
+    "address": {
+      "city": "Lynemore",
+      "number": 31,
+      "street": "South Crescent",
+    },
     "age": 35,
     "name": "Stefan Hart",
   },
   {
+    "address": {
+      "city": "Winslade",
+      "number": 42,
+      "street": "Folkestone Road",
+    },
     "age": 35,
     "name": "Jaxen Smith",
   },
   {
+    "address": {
+      "city": "Malling",
+      "number": 96,
+      "street": "Cunnery Rd",
+    },
     "age": 34,
     "name": "Kiara Nava",
   },
   {
+    "address": {
+      "city": "Haslington",
+      "number": 12,
+      "street": "Warner Close",
+    },
     "age": 32,
     "name": "Deandre Vu",
   },
@@ -28,22 +53,47 @@ exports[`useTable > should return filtered, sorted and paginated rows 1`] = `
 exports[`useTableRows > should return filtered, sorted and paginated rows 1`] = `
 [
   {
+    "address": {
+      "city": "Frostenden",
+      "number": 13,
+      "street": "Sandyhill Rd",
+    },
     "age": 37,
     "name": "Annabella Vargas",
   },
   {
+    "address": {
+      "city": "Lynemore",
+      "number": 31,
+      "street": "South Crescent",
+    },
     "age": 35,
     "name": "Stefan Hart",
   },
   {
+    "address": {
+      "city": "Winslade",
+      "number": 42,
+      "street": "Folkestone Road",
+    },
     "age": 35,
     "name": "Jaxen Smith",
   },
   {
+    "address": {
+      "city": "Malling",
+      "number": 96,
+      "street": "Cunnery Rd",
+    },
     "age": 34,
     "name": "Kiara Nava",
   },
   {
+    "address": {
+      "city": "Haslington",
+      "number": 12,
+      "street": "Warner Close",
+    },
     "age": 32,
     "name": "Deandre Vu",
   },
