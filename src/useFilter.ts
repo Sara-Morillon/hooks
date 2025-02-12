@@ -5,7 +5,7 @@ export type Unknown<T> = {
 }
 
 export type IFilterFunctions<T, F extends Unknown<T> = T> = {
-  [field in keyof T]?: (row: T, filter: F[field]) => boolean
+  [field in keyof F]?: (row: T, filter: F[field]) => boolean
 }
 
 export interface IFilterState<T, F extends Unknown<T> = T> {
