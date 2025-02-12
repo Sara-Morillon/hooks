@@ -479,93 +479,12 @@ exports[`useSort > should sort rows with custom sort function 1`] = `
   "rows": [
     {
       "address": {
-        "city": "Druimkinnerras",
-        "number": 47,
-        "street": "Crescent Avenue",
-      },
-      "age": 30,
-      "name": "Zola Ray",
-    },
-    {
-      "address": {
-        "city": "New Inn",
-        "number": 50,
-        "street": "Iolaire Road",
-      },
-      "age": 32,
-      "name": "Arlo Curtis",
-    },
-    {
-      "address": {
-        "city": "Little Woolstone",
-        "number": 6,
-        "street": "Overton Circle",
+        "city": "Beckley",
+        "number": 19,
+        "street": "Annfield Rd",
       },
       "age": 39,
-      "name": "Alexis West",
-    },
-    {
-      "address": {
-        "city": "Kirtling Green",
-        "number": 6,
-        "street": "Witney Way",
-      },
-      "age": 40,
-      "name": "Diego Fitzpatrick",
-    },
-    {
-      "address": {
-        "city": "Frostenden",
-        "number": 13,
-        "street": "Sandyhill Rd",
-      },
-      "age": 37,
-      "name": "Annabella Vargas",
-    },
-    {
-      "address": {
-        "city": "Sopworth",
-        "number": 41,
-        "street": "Hounslow Rd",
-      },
-      "age": 34,
-      "name": "Ryker Gregory",
-    },
-    {
-      "address": {
-        "city": "Rowley",
-        "number": 67,
-        "street": "Harehills Lane",
-      },
-      "age": 40,
-      "name": "Alaya Winters",
-    },
-    {
-      "address": {
-        "city": "Haslington",
-        "number": 12,
-        "street": "Warner Close",
-      },
-      "age": 32,
-      "name": "Deandre Vu",
-    },
-    {
-      "address": {
-        "city": "Sandaig",
-        "number": 97,
-        "street": "Wade Lane",
-      },
-      "age": 38,
-      "name": "Kimora Higgins",
-    },
-    {
-      "address": {
-        "city": "Gartavaich",
-        "number": 11,
-        "street": "Guildry Street",
-      },
-      "age": 30,
-      "name": "Sterling Pugh",
+      "name": "Gerardo Pearson",
     },
     {
       "address": {
@@ -578,21 +497,57 @@ exports[`useSort > should sort rows with custom sort function 1`] = `
     },
     {
       "address": {
-        "city": "Beckley",
-        "number": 19,
-        "street": "Annfield Rd",
+        "city": "Druimkinnerras",
+        "number": 47,
+        "street": "Crescent Avenue",
       },
-      "age": 39,
-      "name": "Gerardo Pearson",
+      "age": 30,
+      "name": "Zola Ray",
     },
     {
       "address": {
-        "city": "Malling",
-        "number": 96,
-        "street": "Cunnery Rd",
+        "city": "Frostenden",
+        "number": 13,
+        "street": "Sandyhill Rd",
       },
-      "age": 34,
-      "name": "Kiara Nava",
+      "age": 37,
+      "name": "Annabella Vargas",
+    },
+    {
+      "address": {
+        "city": "Gartavaich",
+        "number": 11,
+        "street": "Guildry Street",
+      },
+      "age": 30,
+      "name": "Sterling Pugh",
+    },
+    {
+      "address": {
+        "city": "Haslington",
+        "number": 12,
+        "street": "Warner Close",
+      },
+      "age": 32,
+      "name": "Deandre Vu",
+    },
+    {
+      "address": {
+        "city": "Kirtling Green",
+        "number": 6,
+        "street": "Witney Way",
+      },
+      "age": 40,
+      "name": "Diego Fitzpatrick",
+    },
+    {
+      "address": {
+        "city": "Little Woolstone",
+        "number": 6,
+        "street": "Overton Circle",
+      },
+      "age": 39,
+      "name": "Alexis West",
     },
     {
       "address": {
@@ -605,6 +560,15 @@ exports[`useSort > should sort rows with custom sort function 1`] = `
     },
     {
       "address": {
+        "city": "Malling",
+        "number": 96,
+        "street": "Cunnery Rd",
+      },
+      "age": 34,
+      "name": "Kiara Nava",
+    },
+    {
+      "address": {
         "city": "Myddfai",
         "number": 19,
         "street": "Ilchester Road",
@@ -614,12 +578,12 @@ exports[`useSort > should sort rows with custom sort function 1`] = `
     },
     {
       "address": {
-        "city": "Winslade",
-        "number": 42,
-        "street": "Folkestone Road",
+        "city": "New Inn",
+        "number": 50,
+        "street": "Iolaire Road",
       },
-      "age": 35,
-      "name": "Jaxen Smith",
+      "age": 32,
+      "name": "Arlo Curtis",
     },
     {
       "address": {
@@ -630,9 +594,50 @@ exports[`useSort > should sort rows with custom sort function 1`] = `
       "age": 30,
       "name": "Olivia Camacho",
     },
+    {
+      "address": {
+        "city": "Rowley",
+        "number": 67,
+        "street": "Harehills Lane",
+      },
+      "age": 40,
+      "name": "Alaya Winters",
+    },
+    {
+      "address": {
+        "city": "Sandaig",
+        "number": 97,
+        "street": "Wade Lane",
+      },
+      "age": 38,
+      "name": "Kimora Higgins",
+    },
+    {
+      "address": {
+        "city": "Sopworth",
+        "number": 41,
+        "street": "Hounslow Rd",
+      },
+      "age": 34,
+      "name": "Ryker Gregory",
+    },
+    {
+      "address": {
+        "city": "Winslade",
+        "number": 42,
+        "street": "Folkestone Road",
+      },
+      "age": 35,
+      "name": "Jaxen Smith",
+    },
   ],
   "sort": [Function],
-  "state": [],
+  "state": [
+    {
+      "dir": "asc",
+      "field": "address",
+    },
+  ],
 }
 `;
 
@@ -1114,93 +1119,12 @@ exports[`useSortedRows > should sort rows with custom sort function 1`] = `
 [
   {
     "address": {
-      "city": "Druimkinnerras",
-      "number": 47,
-      "street": "Crescent Avenue",
-    },
-    "age": 30,
-    "name": "Zola Ray",
-  },
-  {
-    "address": {
-      "city": "New Inn",
-      "number": 50,
-      "street": "Iolaire Road",
-    },
-    "age": 32,
-    "name": "Arlo Curtis",
-  },
-  {
-    "address": {
-      "city": "Little Woolstone",
-      "number": 6,
-      "street": "Overton Circle",
+      "city": "Beckley",
+      "number": 19,
+      "street": "Annfield Rd",
     },
     "age": 39,
-    "name": "Alexis West",
-  },
-  {
-    "address": {
-      "city": "Kirtling Green",
-      "number": 6,
-      "street": "Witney Way",
-    },
-    "age": 40,
-    "name": "Diego Fitzpatrick",
-  },
-  {
-    "address": {
-      "city": "Frostenden",
-      "number": 13,
-      "street": "Sandyhill Rd",
-    },
-    "age": 37,
-    "name": "Annabella Vargas",
-  },
-  {
-    "address": {
-      "city": "Sopworth",
-      "number": 41,
-      "street": "Hounslow Rd",
-    },
-    "age": 34,
-    "name": "Ryker Gregory",
-  },
-  {
-    "address": {
-      "city": "Rowley",
-      "number": 67,
-      "street": "Harehills Lane",
-    },
-    "age": 40,
-    "name": "Alaya Winters",
-  },
-  {
-    "address": {
-      "city": "Haslington",
-      "number": 12,
-      "street": "Warner Close",
-    },
-    "age": 32,
-    "name": "Deandre Vu",
-  },
-  {
-    "address": {
-      "city": "Sandaig",
-      "number": 97,
-      "street": "Wade Lane",
-    },
-    "age": 38,
-    "name": "Kimora Higgins",
-  },
-  {
-    "address": {
-      "city": "Gartavaich",
-      "number": 11,
-      "street": "Guildry Street",
-    },
-    "age": 30,
-    "name": "Sterling Pugh",
+    "name": "Gerardo Pearson",
   },
   {
     "address": {
@@ -1213,21 +1137,57 @@ exports[`useSortedRows > should sort rows with custom sort function 1`] = `
   },
   {
     "address": {
-      "city": "Beckley",
-      "number": 19,
-      "street": "Annfield Rd",
+      "city": "Druimkinnerras",
+      "number": 47,
+      "street": "Crescent Avenue",
     },
-    "age": 39,
-    "name": "Gerardo Pearson",
+    "age": 30,
+    "name": "Zola Ray",
   },
   {
     "address": {
-      "city": "Malling",
-      "number": 96,
-      "street": "Cunnery Rd",
+      "city": "Frostenden",
+      "number": 13,
+      "street": "Sandyhill Rd",
     },
-    "age": 34,
-    "name": "Kiara Nava",
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "address": {
+      "city": "Gartavaich",
+      "number": 11,
+      "street": "Guildry Street",
+    },
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "address": {
+      "city": "Haslington",
+      "number": 12,
+      "street": "Warner Close",
+    },
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "address": {
+      "city": "Kirtling Green",
+      "number": 6,
+      "street": "Witney Way",
+    },
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "address": {
+      "city": "Little Woolstone",
+      "number": 6,
+      "street": "Overton Circle",
+    },
+    "age": 39,
+    "name": "Alexis West",
   },
   {
     "address": {
@@ -1240,6 +1200,15 @@ exports[`useSortedRows > should sort rows with custom sort function 1`] = `
   },
   {
     "address": {
+      "city": "Malling",
+      "number": 96,
+      "street": "Cunnery Rd",
+    },
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "address": {
       "city": "Myddfai",
       "number": 19,
       "street": "Ilchester Road",
@@ -1249,12 +1218,12 @@ exports[`useSortedRows > should sort rows with custom sort function 1`] = `
   },
   {
     "address": {
-      "city": "Winslade",
-      "number": 42,
-      "street": "Folkestone Road",
+      "city": "New Inn",
+      "number": 50,
+      "street": "Iolaire Road",
     },
-    "age": 35,
-    "name": "Jaxen Smith",
+    "age": 32,
+    "name": "Arlo Curtis",
   },
   {
     "address": {
@@ -1264,6 +1233,42 @@ exports[`useSortedRows > should sort rows with custom sort function 1`] = `
     },
     "age": 30,
     "name": "Olivia Camacho",
+  },
+  {
+    "address": {
+      "city": "Rowley",
+      "number": 67,
+      "street": "Harehills Lane",
+    },
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+  {
+    "address": {
+      "city": "Sandaig",
+      "number": 97,
+      "street": "Wade Lane",
+    },
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "address": {
+      "city": "Sopworth",
+      "number": 41,
+      "street": "Hounslow Rd",
+    },
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "address": {
+      "city": "Winslade",
+      "number": 42,
+      "street": "Folkestone Road",
+    },
+    "age": 35,
+    "name": "Jaxen Smith",
   },
 ]
 `;

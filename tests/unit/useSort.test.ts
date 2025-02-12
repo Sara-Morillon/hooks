@@ -68,7 +68,9 @@ describe('useSortedRows', () => {
     const sortFunctions: ISortFunctions<IData> = {
       address: (rowA, rowB) => rowA.address.city.localeCompare(rowB.address.city),
     }
-    const { result } = renderHook(() => useSortedRows(mockTableData(), [], sortFunctions))
+    const { result } = renderHook(() =>
+      useSortedRows(mockTableData(), [{ field: 'address', dir: 'asc' }], sortFunctions),
+    )
     expect(result.current).toMatchSnapshot()
   })
 })
@@ -132,7 +134,7 @@ describe('useSort', () => {
     const sortFunctions: ISortFunctions<IData> = {
       address: (rowA, rowB) => rowA.address.city.localeCompare(rowB.address.city),
     }
-    const { result } = renderHook(() => useSort(mockTableData(), [], sortFunctions))
+    const { result } = renderHook(() => useSort(mockTableData(), [{ field: 'address', dir: 'asc' }], sortFunctions))
     expect(result.current).toMatchSnapshot()
   })
 })
