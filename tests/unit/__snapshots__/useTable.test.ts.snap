@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useTable > should return filtered, sorted and paginated rows 1`] = `
+[
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+]
+`;
+
+exports[`useTableRows > should return filtered, sorted and paginated rows 1`] = `
+[
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+]
+`;

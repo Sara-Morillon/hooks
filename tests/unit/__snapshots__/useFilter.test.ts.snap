@@ -1,0 +1,45 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useFilter > should filter rows with custom filter function 1`] = `
+[
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+]
+`;
+
+exports[`useFilter > should filter rows with default filter function 1`] = `
+[
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+]
+`;
+
+exports[`useFilteredRows > should filter rows with custom filter function 1`] = `
+[
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+]
+`;
+
+exports[`useFilteredRows > should filter rows with default filter function 1`] = `
+[
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+]
+`;

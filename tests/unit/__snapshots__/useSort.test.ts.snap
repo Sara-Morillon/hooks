@@ -1,0 +1,439 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useSort > should return rows sorted asc 1`] = `
+[
+  {
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+]
+`;
+
+exports[`useSort > should return rows sorted desc 1`] = `
+[
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+]
+`;
+
+exports[`useSort > should sort by multiple fields 1`] = `
+[
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+]
+`;
+
+exports[`useSortedRows > should return rows sorted asc 1`] = `
+[
+  {
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+]
+`;
+
+exports[`useSortedRows > should return rows sorted desc 1`] = `
+[
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+]
+`;
+
+exports[`useSortedRows > should sort by multiple fields 1`] = `
+[
+  {
+    "age": 30,
+    "name": "Zola Ray",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+]
+`;

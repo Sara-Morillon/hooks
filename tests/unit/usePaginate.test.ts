@@ -36,15 +36,7 @@ describe('usePaginatedRows', () => {
 
   it('should return subset of rows', () => {
     const { result } = renderHook(() => usePaginatedRows(mockTableData(), { index: 2, limit: 7 }))
-    expect(result.current).toEqual([
-      { name: 'Deandre Vu', age: 32 },
-      { name: 'Kimora Higgins', age: 38 },
-      { name: 'Sterling Pugh', age: 30 },
-      { name: 'Landry Pineda', age: 31 },
-      { name: 'Gerardo Pearson', age: 39 },
-      { name: 'Kiara Nava', age: 34 },
-      { name: 'Stefan Hart', age: 35 },
-    ])
+    expect(result.current).toMatchSnapshot()
   })
 })
 
@@ -75,14 +67,6 @@ describe('usePaginate', () => {
 
   it('should return subset of rows', () => {
     const { result } = renderHook(() => usePaginate(mockTableData(), { index: 2, limit: 7 }))
-    expect(result.current.rows).toEqual([
-      { name: 'Deandre Vu', age: 32 },
-      { name: 'Kimora Higgins', age: 38 },
-      { name: 'Sterling Pugh', age: 30 },
-      { name: 'Landry Pineda', age: 31 },
-      { name: 'Gerardo Pearson', age: 39 },
-      { name: 'Kiara Nava', age: 34 },
-      { name: 'Stefan Hart', age: 35 },
-    ])
+    expect(result.current.rows).toMatchSnapshot()
   })
 })

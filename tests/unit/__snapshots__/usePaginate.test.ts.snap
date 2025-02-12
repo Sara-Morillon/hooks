@@ -1,0 +1,67 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`usePaginate > should return subset of rows 1`] = `
+[
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+]
+`;
+
+exports[`usePaginatedRows > should return subset of rows 1`] = `
+[
+  {
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "age": 39,
+    "name": "Gerardo Pearson",
+  },
+  {
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+]
+`;

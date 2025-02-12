@@ -45,16 +45,13 @@ describe('useFilteredRows', () => {
 
   it('should filter rows with default filter function', () => {
     const { result } = renderHook(() => useFilteredRows(mockTableData(), { name: 'Zola Ray' }))
-    expect(result.current).toEqual([{ name: 'Zola Ray', age: 30 }])
+    expect(result.current).toMatchSnapshot()
   })
 
   it('should filter rows with custom filter function', () => {
     const filterFunctions: IFilterFunctions<IData> = { name: (row, value) => row.name.includes(value) }
     const { result } = renderHook(() => useFilteredRows(mockTableData(), { name: 'x' }, filterFunctions))
-    expect(result.current).toEqual([
-      { name: 'Alexis West', age: 39 },
-      { name: 'Jaxen Smith', age: 35 },
-    ])
+    expect(result.current).toMatchSnapshot()
   })
 })
 
@@ -94,15 +91,12 @@ describe('useFilter', () => {
 
   it('should filter rows with default filter function', () => {
     const { result } = renderHook(() => useFilter(mockTableData(), { name: 'Zola Ray' }))
-    expect(result.current.rows).toEqual([{ name: 'Zola Ray', age: 30 }])
+    expect(result.current.rows).toMatchSnapshot()
   })
 
   it('should filter rows with custom filter function', () => {
     const filterFunctions: IFilterFunctions<IData> = { name: (row, value) => row.name.includes(value) }
     const { result } = renderHook(() => useFilter(mockTableData(), { name: 'x' }, filterFunctions))
-    expect(result.current.rows).toEqual([
-      { name: 'Alexis West', age: 39 },
-      { name: 'Jaxen Smith', age: 35 },
-    ])
+    expect(result.current.rows).toMatchSnapshot()
   })
 })

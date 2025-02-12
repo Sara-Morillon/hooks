@@ -42,13 +42,7 @@ describe('useTableRows', () => {
     }
     const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
     const { result } = renderHook(() => useTableRows(mockTableData(), state, options))
-    expect(result.current.rows).toEqual([
-      { name: 'Annabella Vargas', age: 37 },
-      { name: 'Stefan Hart', age: 35 },
-      { name: 'Jaxen Smith', age: 35 },
-      { name: 'Kiara Nava', age: 34 },
-      { name: 'Deandre Vu', age: 32 },
-    ])
+    expect(result.current.rows).toMatchSnapshot()
   })
 
   it('should return total filtered rows', () => {
@@ -84,13 +78,7 @@ describe('useTable', () => {
     }
     const options: ITableOptions<IData> = { filterFunctions: { name: (row, value) => row.name.includes(value) } }
     const { result } = renderHook(() => useTable(mockTableData(), state, options))
-    expect(result.current.rows).toEqual([
-      { name: 'Annabella Vargas', age: 37 },
-      { name: 'Stefan Hart', age: 35 },
-      { name: 'Jaxen Smith', age: 35 },
-      { name: 'Kiara Nava', age: 34 },
-      { name: 'Deandre Vu', age: 32 },
-    ])
+    expect(result.current.rows).toMatchSnapshot()
   })
 
   it('should return total filtered rows', () => {
