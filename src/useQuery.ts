@@ -1,22 +1,33 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export interface IQueryOptions<T> {
-  autoRun?: boolean
-  defaultValue?: T
-}
+type S<T> = T extends (...args: infer P) => infer R ? { p: P; r: Awaited<R> } : never
 
-export interface IQueryResult<T> {
-  execute: () => Promise<void>
+type O<F> =
+  | (S<F>['p'] extends []
+      ? {
+          autoRun: true
+          defaultParams: S<F>['p']
+          defaultValue?: S<F>['r']
+        }
+      : {
+          autoRun: true
+          defaultValue?: S<F>['r']
+        })
+  | {
+      autoRun?: false
+      defaultValue?: S<F>['r']
+    }
+
+type R<F> = {
+  execute: (...params: S<F>['p']) => Promise<void>
   loading: boolean
   error?: unknown
-  result: T
+  result: S<F>['r']
 }
 
-export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T> & { defaultValue: T }): IQueryResult<T>
-export function useQuery<T>(queryFn: () => Promise<T>, options?: IQueryOptions<T>): IQueryResult<T | undefined>
-export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T> = {}): IQueryResult<T | undefined> {
+export function useQuery<F extends Function>(queryFn: F, options: O<F> = {}): R<F> {
   const [loading, setLoading] = useState(options.autoRun || false)
-  const [result, setResult] = useState<T | undefined>(options.defaultValue)
+  const [result, setResult] = useState<S<F>['r'] | undefined>(options.defaultValue)
   const [error, setError] = useState<unknown>()
   const [mounted, setMounted] = useState(false)
 
@@ -27,27 +38,34 @@ export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T>
     }
   }, [])
 
-  const execute = useCallback(() => {
-    if (mounted) {
-      setLoading(true)
-      setError(undefined)
-      return queryFn()
-        .then((data) => {
-          if (mounted) setResult(data)
-        })
-        .catch((error) => {
-          if (mounted) setError(error)
-        })
-        .finally(() => {
-          if (mounted) setLoading(false)
-        })
-    }
-    return Promise.resolve()
-  }, [mounted, queryFn])
+  const execute = useCallback(
+    (...args: S<F>['p']) => {
+      if (mounted) {
+        setLoading(true)
+        setError(undefined)
+        return queryFn(...args)
+          .then((data: S<F>['p']) => {
+            if (mounted) setResult(data)
+          })
+          .catch((error: unknown) => {
+            if (mounted) setError(error)
+          })
+          .finally(() => {
+            if (mounted) setLoading(false)
+          })
+      }
+      return Promise.resolve()
+    },
+    [mounted, queryFn],
+  )
 
   useEffect(() => {
     if (options.autoRun) {
-      void execute()
+      if ('defaultParams' in options) {
+        void execute(...options.defaultParams)
+      } else {
+        void execute()
+      }
     }
   }, [execute, options.autoRun])
 
