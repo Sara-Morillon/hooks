@@ -6,11 +6,11 @@ type O<F> =
   | (S<F>['p'] extends []
       ? {
           autoRun: true
-          defaultParams: S<F>['p']
           defaultValue?: S<F>['r']
         }
       : {
           autoRun: true
+          defaultParams: S<F>['p']
           defaultValue?: S<F>['r']
         })
   | {
