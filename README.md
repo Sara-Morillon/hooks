@@ -19,7 +19,8 @@ yarn add @saramorillon/hooks
 ## Usage
 
 - [useTheme](docs/useTheme.md)
-- [useQuery](docs/useQuery.md)
+- [useFetch](docs/useFetch.md)
+- [useAction](docs/useAction.md)
 - [usePagination](docs/usePagination.md)
 - [useForm](docs/useForm.md)
 - [useCopy](docs/useCopy.md)

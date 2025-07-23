@@ -1,15 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export interface IActionResult<P extends unknown[], T> {
-  execute: (...args: P) => Promise<void>
-  loading: boolean
-  error?: unknown
-  result: T
-}
+export type IActionResult<P extends unknown[], T> = [
+  T | undefined,
+  { loading: boolean; error?: unknown },
+  (...args: P) => Promise<void>,
+]
 
-export function useAction<P extends unknown[], T>(
-  queryFn: (...args: P) => Promise<T>,
-): IActionResult<P, T | undefined> {
+export function useAction<P extends unknown[], T>(action: (...args: P) => Promise<T>): IActionResult<P, T> {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<T | undefined>(undefined)
   const [error, setError] = useState<unknown>()
@@ -27,7 +24,7 @@ export function useAction<P extends unknown[], T>(
       if (mounted) {
         setLoading(true)
         setError(undefined)
-        return queryFn(...args)
+        return action(...args)
           .then((data: T) => {
             if (mounted) setResult(data)
           })
@@ -40,8 +37,8 @@ export function useAction<P extends unknown[], T>(
       }
       return Promise.resolve()
     },
-    [mounted, queryFn],
+    [mounted, action],
   )
 
-  return useMemo(() => ({ execute, loading, error, result }), [execute, loading, error, result])
+  return useMemo(() => [result, { loading, error }, execute], [result, loading, error, execute])
 }
