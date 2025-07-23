@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export interface IQueryResult<P extends unknown[], T> {
+export interface IActionResult<P extends unknown[], T> {
   execute: (...args: P) => Promise<void>
   loading: boolean
   error?: unknown
   result: T
 }
 
-export function useAction<P extends unknown[], T>(queryFn: (...args: P) => Promise<T>): IQueryResult<P, T | undefined> {
+export function useAction<P extends unknown[], T>(
+  queryFn: (...args: P) => Promise<T>,
+): IActionResult<P, T | undefined> {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<T | undefined>(undefined)
   const [error, setError] = useState<unknown>()

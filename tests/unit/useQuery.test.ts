@@ -34,7 +34,7 @@ describe('useQuery', () => {
   it('should run callback when executing query', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useQuery(queryFn))
-    await act(() => result.current.execute())
+    await act(() => result.current.refresh())
     expect(queryFn).toHaveBeenCalled()
   })
 
@@ -43,14 +43,14 @@ describe('useQuery', () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result, unmount } = renderHook(() => useQuery(queryFn))
     unmount()
-    await act(() => result.current.execute())
+    await act(() => result.current.refresh())
     expect(queryFn).not.toHaveBeenCalled()
   })
 
   it('should be loading when executing query', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useQuery(queryFn))
-    act(() => void result.current.execute())
+    act(() => void result.current.refresh())
     expect(result.current.loading).toBe(true)
     await flushPromises()
   })
@@ -58,14 +58,14 @@ describe('useQuery', () => {
   it('should return query result', async () => {
     const queryFn = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useQuery(queryFn))
-    await act(() => result.current.execute())
+    await act(() => result.current.refresh())
     expect(result.current.result).toBe('result')
   })
 
   it('should return query error', async () => {
     const queryFn = vi.fn().mockRejectedValue('error')
     const { result } = renderHook(() => useQuery(queryFn))
-    await act(() => result.current.execute())
+    await act(() => result.current.refresh())
     expect(result.current.error).toBe('error')
   })
 })

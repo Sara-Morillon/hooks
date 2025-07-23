@@ -5,7 +5,7 @@ export interface IQueryOptions<T> {
 }
 
 export interface IQueryResult<T> {
-  execute: () => Promise<void>
+  refresh: () => Promise<void>
   loading: boolean
   error?: unknown
   result: T
@@ -26,7 +26,7 @@ export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T>
     }
   }, [])
 
-  const execute = useCallback(() => {
+  const refresh = useCallback(() => {
     if (mounted) {
       setLoading(true)
       setError(undefined)
@@ -45,8 +45,8 @@ export function useQuery<T>(queryFn: () => Promise<T>, options: IQueryOptions<T>
   }, [mounted, queryFn])
 
   useEffect(() => {
-    void execute()
-  }, [execute])
+    void refresh()
+  }, [refresh])
 
-  return useMemo(() => ({ execute, loading, error, result }), [execute, loading, error, result])
+  return useMemo(() => ({ refresh, loading, error, result }), [refresh, loading, error, result])
 }
