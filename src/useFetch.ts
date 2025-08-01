@@ -1,16 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-export interface IFetchOptions<T> {
-  defaultValue?: T
-}
-
 export type IFetchResult<T> = [T, { loading: boolean; error?: unknown }, () => Promise<void>]
 
-export function useFetch<T>(fetch: () => Promise<T>, options: IFetchOptions<T> & { defaultValue: T }): IFetchResult<T>
-export function useFetch<T>(fetch: () => Promise<T>, options?: IFetchOptions<T>): IFetchResult<T | undefined>
-export function useFetch<T>(fetch: () => Promise<T>, options: IFetchOptions<T> = {}): IFetchResult<T | undefined> {
+export function useFetch<T>(fetch: () => Promise<T>, defaultValue: T): IFetchResult<T>
+export function useFetch<T>(fetch: () => Promise<T>): IFetchResult<T | undefined>
+export function useFetch<T>(fetch: () => Promise<T>, defaultValue?: T): IFetchResult<T | undefined> {
   const [loading, setLoading] = useState(true)
-  const [data, setData] = useState<T | undefined>(options.defaultValue)
+  const [data, setData] = useState<T | undefined>(defaultValue)
   const [error, setError] = useState<unknown>()
   const [mounted, setMounted] = useState(false)
 

@@ -25,16 +25,14 @@ function MyComponent() {
 ## API
 
 ```typescript
-useFetch<T>(fetch: () => Promise<T>, options?: IFetchOptions<T>): IFetchResult<T>
+useFetch<T>(fetch: () => Promise<T>, defaultValue?: T): IFetchResult<T>
 ```
 
 ### Arguments
 
 `fetch: () => Promise<T>` - The function to run. **:warning: Must be memoized to avoid potential infinite loops.**
 
-`options?: IFetchOptions<T>` - an object containing:
-
-- `defaultValue?: T` - the default value returned by the hook.
+`defaultValue?: T` - the default value returned by the hook.
 
 ### Returns
 

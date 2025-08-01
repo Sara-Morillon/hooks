@@ -19,7 +19,7 @@ describe('useFetch', () => {
 
   it('should return default value by default', async () => {
     const fetch = vi.fn().mockResolvedValue('result')
-    const { result } = renderHook(() => useFetch(fetch, { defaultValue: 'default' }))
+    const { result } = renderHook(() => useFetch(fetch, 'default'))
     expect(result.current[0]).toBe('default')
     await act(() => Promise.resolve())
   })
