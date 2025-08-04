@@ -5,12 +5,10 @@ export interface IForm<T = never> {
   onChange<K extends keyof T>(name: K, value: T[K]): void
   submit(e?: FormEvent): void
   reset(): void
-  loading: boolean
   error?: unknown
 }
 
-export function useForm<T = never>(save: (values: T) => void | Promise<void>, initialValues: T): IForm<T> {
-  const [loading, setLoading] = useState(false)
+export function useForm<T = never>(save: (values: T) => void, initialValues: T): IForm<T> {
   const [error, setError] = useState<unknown>()
   const [values, setValues] = useState<T>(initialValues)
 
@@ -20,14 +18,14 @@ export function useForm<T = never>(save: (values: T) => void | Promise<void>, in
 
   const submit = useCallback(
     (e?: FormEvent) => {
-      setLoading(true)
-      setError(undefined)
       e?.preventDefault()
       e?.stopPropagation()
-      Promise.resolve()
-        .then(() => save(values))
-        .catch(setError)
-        .finally(() => setLoading(false))
+      setError(undefined)
+      try {
+        save(values)
+      } catch (error) {
+        setError(error)
+      }
     },
     [save, values],
   )
@@ -36,8 +34,5 @@ export function useForm<T = never>(save: (values: T) => void | Promise<void>, in
     setValues(initialValues)
   }, [initialValues])
 
-  return useMemo(
-    () => ({ values, onChange, submit, reset, loading, error }),
-    [values, onChange, submit, reset, loading, error],
-  )
+  return useMemo(() => ({ values, onChange, submit, reset, error }), [values, onChange, submit, reset, error])
 }

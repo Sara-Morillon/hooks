@@ -44,15 +44,15 @@ describe('useForm', () => {
     expect(result.current.values).toEqual({ prop: 'value' })
   })
 
-  it('should be loading when submitting form', async () => {
-    const { result } = renderHook(() => useForm(vi.fn().mockResolvedValue(undefined), { prop: 'value' }))
-    act(() => result.current.submit())
-    expect(result.current.loading).toBe(true)
-    await flushPromises()
-  })
-
   it('should set error when submit fails', async () => {
-    const { result } = renderHook(() => useForm(vi.fn().mockRejectedValue(new Error('500')), { prop: 'value' }))
+    const { result } = renderHook(() =>
+      useForm(
+        vi.fn().mockImplementation(() => {
+          throw new Error('500')
+        }),
+        { prop: 'value' },
+      ),
+    )
     act(() => result.current.submit())
     await flushPromises()
     expect(result.current.error).toEqual(new Error('500'))

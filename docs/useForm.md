@@ -47,5 +47,4 @@ An object containing:
 - `onChange: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form.
 - `submit: (e: FormEvent) => void` - a function for submitting a form.
 - `reset: () => void` - a function to reset the form to its initial values.
-- `loading: boolean` - indicates when the form is being submitted.
 - `error?: unknown` - contains a potential error thrown by the save function.
