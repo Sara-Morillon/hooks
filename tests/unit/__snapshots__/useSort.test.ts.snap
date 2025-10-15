@@ -1115,7 +1115,7 @@ exports[`useSortedRows > should sort by multiple fields 1`] = `
 ]
 `;
 
-exports[`useSortedRows > should sort rows with custom sort function 1`] = `
+exports[`useSortedRows > should sort rows with custom sort function, asc 1`] = `
 [
   {
     "address": {
@@ -1269,6 +1269,164 @@ exports[`useSortedRows > should sort rows with custom sort function 1`] = `
     },
     "age": 35,
     "name": "Jaxen Smith",
+  },
+]
+`;
+
+exports[`useSortedRows > should sort rows with custom sort function, desc 1`] = `
+[
+  {
+    "address": {
+      "city": "Winslade",
+      "number": 42,
+      "street": "Folkestone Road",
+    },
+    "age": 35,
+    "name": "Jaxen Smith",
+  },
+  {
+    "address": {
+      "city": "Sopworth",
+      "number": 41,
+      "street": "Hounslow Rd",
+    },
+    "age": 34,
+    "name": "Ryker Gregory",
+  },
+  {
+    "address": {
+      "city": "Sandaig",
+      "number": 97,
+      "street": "Wade Lane",
+    },
+    "age": 38,
+    "name": "Kimora Higgins",
+  },
+  {
+    "address": {
+      "city": "Rowley",
+      "number": 67,
+      "street": "Harehills Lane",
+    },
+    "age": 40,
+    "name": "Alaya Winters",
+  },
+  {
+    "address": {
+      "city": "Parkham",
+      "number": 19,
+      "street": "Well Lane",
+    },
+    "age": 30,
+    "name": "Olivia Camacho",
+  },
+  {
+    "address": {
+      "city": "New Inn",
+      "number": 50,
+      "street": "Iolaire Road",
+    },
+    "age": 32,
+    "name": "Arlo Curtis",
+  },
+  {
+    "address": {
+      "city": "Myddfai",
+      "number": 19,
+      "street": "Ilchester Road",
+    },
+    "age": 38,
+    "name": "Gemma Terrell",
+  },
+  {
+    "address": {
+      "city": "Malling",
+      "number": 96,
+      "street": "Cunnery Rd",
+    },
+    "age": 34,
+    "name": "Kiara Nava",
+  },
+  {
+    "address": {
+      "city": "Lynemore",
+      "number": 31,
+      "street": "South Crescent",
+    },
+    "age": 35,
+    "name": "Stefan Hart",
+  },
+  {
+    "address": {
+      "city": "Little Woolstone",
+      "number": 6,
+      "street": "Overton Circle",
+    },
+    "age": 39,
+    "name": "Alexis West",
+  },
+  {
+    "address": {
+      "city": "Kirtling Green",
+      "number": 6,
+      "street": "Witney Way",
+    },
+    "age": 40,
+    "name": "Diego Fitzpatrick",
+  },
+  {
+    "address": {
+      "city": "Haslington",
+      "number": 12,
+      "street": "Warner Close",
+    },
+    "age": 32,
+    "name": "Deandre Vu",
+  },
+  {
+    "address": {
+      "city": "Gartavaich",
+      "number": 11,
+      "street": "Guildry Street",
+    },
+    "age": 30,
+    "name": "Sterling Pugh",
+  },
+  {
+    "address": {
+      "city": "Frostenden",
+      "number": 13,
+      "street": "Sandyhill Rd",
+    },
+    "age": 37,
+    "name": "Annabella Vargas",
+  },
+  {
+    "address": {
+      "city": "Druimkinnerras",
+      "number": 47,
+      "street": "Crescent Avenue",
+    },
+    "age": 30,
+    "name": "Zola Ray",
+  },
+  {
+    "address": {
+      "city": "Dowland",
+      "number": 49,
+      "street": "North Promenade",
+    },
+    "age": 31,
+    "name": "Landry Pineda",
+  },
+  {
+    "address": {
+      "city": "Beckley",
+      "number": 19,
+      "street": "Annfield Rd",
+    },
+    "age": 39,
+    "name": "Gerardo Pearson",
   },
 ]
 `;

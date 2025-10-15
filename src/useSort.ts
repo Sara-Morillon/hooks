@@ -49,7 +49,7 @@ export function useSortedRows<T, F extends Unknown<T> = T>(
       for (const { field, dir } of sort) {
         const sortFunction = sortFunctions?.[field]
         if (sortFunction) {
-          return sortFunction(rowA, rowB)
+          return sortFunction(rowA, rowB) * (dir === 'asc' ? 1 : -1)
         }
         const valueA = rowA[field as keyof T]
         const valueB = rowB[field as keyof T]

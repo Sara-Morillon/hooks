@@ -64,12 +64,22 @@ describe('useSortedRows', () => {
     expect(result.current).toMatchSnapshot()
   })
 
-  it('should sort rows with custom sort function', () => {
+  it('should sort rows with custom sort function, asc', () => {
     const sortFunctions: ISortFunctions<IData> = {
       address: (rowA, rowB) => rowA.address.city.localeCompare(rowB.address.city),
     }
     const { result } = renderHook(() =>
       useSortedRows(mockTableData(), [{ field: 'address', dir: 'asc' }], sortFunctions),
+    )
+    expect(result.current).toMatchSnapshot()
+  })
+
+  it('should sort rows with custom sort function, desc', () => {
+    const sortFunctions: ISortFunctions<IData> = {
+      address: (rowA, rowB) => rowA.address.city.localeCompare(rowB.address.city),
+    }
+    const { result } = renderHook(() =>
+      useSortedRows(mockTableData(), [{ field: 'address', dir: 'desc' }], sortFunctions),
     )
     expect(result.current).toMatchSnapshot()
   })
