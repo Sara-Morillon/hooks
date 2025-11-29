@@ -1,36 +1,46 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-interface ICopyStatus {
-  authorized: boolean
-  copy: (data: string) => void
-  loading: boolean
-  error?: unknown
-}
+export type ICopyStatus = [
+  authorized: boolean,
+  state: { loading: boolean; error?: unknown },
+  copy: (data: string) => Promise<void>,
+]
 
 export function useCopy(): ICopyStatus {
   const [authorized, setAuthorized] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState()
+  const [error, setError] = useState<unknown>()
 
-  const copy = useCallback((data: string) => {
-    setLoading(true)
-    navigator.clipboard
-      .writeText(data)
-      .catch(setError)
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [])
+  const mountedRef = useRef(true)
 
   useEffect(() => {
-    if (navigator.userAgent.includes('Firefox')) {
-      setAuthorized(true)
-    } else {
-      void navigator.permissions.query({ name: 'clipboard-write' as PermissionName }).then((result) => {
-        setAuthorized(result.state === 'granted' || result.state === 'prompt')
-      })
+    return () => {
+      mountedRef.current = false
     }
   }, [])
 
-  return useMemo(() => ({ authorized, loading, error, copy }), [authorized, loading, error, copy])
+  const copy = useCallback(async (data: string) => {
+    setError(undefined)
+    setLoading(true)
+
+    try {
+      await navigator.clipboard.writeText(data)
+    } catch (error) {
+      if (mountedRef.current) {
+        setError(error)
+      }
+    } finally {
+      if (mountedRef.current) {
+        setLoading(false)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    void navigator.permissions
+      ?.query({ name: 'clipboard-write' as PermissionName })
+      .then((result) => setAuthorized(result.state === 'granted' || result.state === 'prompt'))
+  }, [])
+
+  return useMemo(() => [authorized, { loading, error }, copy], [authorized, loading, error, copy])
 }

@@ -6,57 +6,48 @@ describe('useAction', () => {
   it('should not be loading by default', () => {
     const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
-    expect(result.current[1].loading).toBe(false)
+    expect(result.current[0].loading).toBe(false)
   })
 
   it('should not have error by default', () => {
     const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
-    expect(result.current[1].error).toBeUndefined()
+    expect(result.current[0].error).toBeUndefined()
   })
 
   it('should run callback when executing action', async () => {
     const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
-    await act(() => result.current[2]())
+    await act(() => result.current[1]())
     expect(action).toHaveBeenCalled()
   })
 
   it('should run callback with params when executing action', async () => {
-    const action = vi.fn<(a: string) => Promise<string>>().mockResolvedValue('result')
+    const action = vi.fn<(a: string, signal: AbortSignal) => Promise<string>>().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
-    await act(() => result.current[2]('a'))
-    expect(action).toHaveBeenCalledWith('a')
-  })
-
-  // Waiting for this issue to be fixed: https://github.com/testing-library/react-hooks-testing-library/issues/847
-  it.skip('should not run callback when executing action after unmount', async () => {
-    const action = vi.fn().mockResolvedValue('result')
-    const { result, unmount } = renderHook(() => useAction(action))
-    unmount()
-    await act(() => result.current[2]())
-    expect(action).not.toHaveBeenCalled()
+    await act(() => result.current[1]('a'))
+    expect(action).toHaveBeenCalledWith('a', expect.any(AbortSignal))
   })
 
   it('should be loading when executing action', async () => {
     const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
-    act(() => void result.current[2]())
-    expect(result.current[1].loading).toBe(true)
+    act(() => void result.current[1]())
+    expect(result.current[0].loading).toBe(true)
     await flushPromises()
   })
 
   it('should return action result', async () => {
     const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
-    await act(() => result.current[2]())
-    expect(result.current[0]).toBe('result')
+    const res = await act(() => result.current[1]())
+    expect(res).toBe('result')
   })
 
   it('should return action error', async () => {
     const action = vi.fn().mockRejectedValue('error')
     const { result } = renderHook(() => useAction(action))
-    await act(() => result.current[2]())
-    expect(result.current[1].error).toBe('error')
+    await act(() => result.current[1]())
+    expect(result.current[0].error).toBe('error')
   })
 })

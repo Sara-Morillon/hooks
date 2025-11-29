@@ -67,6 +67,7 @@ usePaginate<T>(data: T[], initialPagination?: IPaginationInfo): IPaginated<T>
 
 `IPaginated<T>` - an object containing:
 
+- `rows: T[]` - the paginated rows.
 - `state: IPaginationInfo` - an object containing:
   - `index: number` - the page index.
   - `limit: number` - the page size.

@@ -1,44 +1,60 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 export type IActionResult<P extends unknown[], T> = [
-  T | undefined,
-  { loading: boolean; error?: unknown },
-  (...args: P) => Promise<void>,
+  state: { loading: boolean; error?: unknown },
+  execute: (...args: P) => Promise<T | undefined>,
+  cancel: () => void,
 ]
 
-export function useAction<P extends unknown[], T>(action: (...args: P) => Promise<T>): IActionResult<P, T> {
+export function useAction<P extends unknown[], T>(
+  action: (...args: [...P, AbortSignal]) => Promise<T>,
+): IActionResult<P, T> {
+  const controllerRef = useRef<AbortController | null>(null)
   const [loading, setLoading] = useState(false)
-  const [result, setResult] = useState<T | undefined>(undefined)
   const [error, setError] = useState<unknown>()
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-    return () => {
-      setMounted(false)
+  const execute = useCallback(
+    async (...args: P) => {
+      if (controllerRef.current) {
+        controllerRef.current.abort()
+      }
+
+      const controller = new AbortController()
+      controllerRef.current = controller
+
+      setLoading(true)
+      setError(undefined)
+      try {
+        const data = await action(...args, controller.signal)
+        if (!controller.signal.aborted) {
+          return data
+        }
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === 'AbortError')) {
+          setError(error)
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false)
+        }
+      }
+    },
+    [action],
+  )
+
+  const cancel = useCallback(() => {
+    if (controllerRef.current) {
+      controllerRef.current.abort()
     }
   }, [])
 
-  const execute = useCallback(
-    (...args: P) => {
-      if (mounted) {
-        setLoading(true)
-        setError(undefined)
-        return action(...args)
-          .then((data: T) => {
-            if (mounted) setResult(data)
-          })
-          .catch((error: unknown) => {
-            if (mounted) setError(error)
-          })
-          .finally(() => {
-            if (mounted) setLoading(false)
-          })
+  useEffect(() => {
+    return () => {
+      if (controllerRef.current) {
+        controllerRef.current.abort()
       }
-      return Promise.resolve()
-    },
-    [mounted, action],
-  )
+    }
+  }, [])
 
-  return useMemo(() => [result, { loading, error }, execute], [result, loading, error, execute])
+  return useMemo(() => [{ loading, error }, execute, cancel], [loading, error, execute, cancel])
 }

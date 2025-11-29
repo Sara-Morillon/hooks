@@ -62,6 +62,6 @@ useSort<T>(data: T[], initialSort?: ISortItem<T>[]): ISorted<T>
 
 `ISorted<T>` - an object containing:
 
-- `rows: T[]` - the filtered, sorted and paginated rows.
+- `rows: T[]` - the sorted rows.
 - `state: ISortItem<T>[][]` - the sort state, as an ordered list.
 - `sort: (field: keyof T, dir?: 'asc' | 'desc') => void` - a function to apply a sort to a field.

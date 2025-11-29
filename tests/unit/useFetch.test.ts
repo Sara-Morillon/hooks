@@ -38,15 +38,6 @@ describe('useFetch', () => {
     expect(fetch).toHaveBeenCalled()
   })
 
-  // Waiting for this issue to be fixed: https://github.com/testing-library/react-hooks-testing-library/issues/847
-  it.skip('should not run callback when fetching data after unmount', async () => {
-    const fetch = vi.fn().mockResolvedValue('result')
-    const { result, unmount } = renderHook(() => useFetch(fetch))
-    unmount()
-    await act(() => result.current[2]())
-    expect(fetch).not.toHaveBeenCalled()
-  })
-
   it('should be loading when fetching data', async () => {
     const fetch = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useFetch(fetch))
