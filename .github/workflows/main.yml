@@ -36,8 +36,11 @@ jobs:
       - name: Run tests
         run: pnpm vitest run
 
+      - name: Update NPM
+        run: npm install -g npm@latest
+
       - name: Publish package
-        run: pnpm publish --access public --no-git-checks
+        run: npm publish
 
   send_discord_notification:
     runs-on: ubuntu-latest
