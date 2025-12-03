@@ -7,7 +7,7 @@ export type IActionResult<P extends unknown[], T> = [
 ]
 
 export function useAction<P extends unknown[], T>(
-  action: (...args: [...P, AbortSignal]) => Promise<T>,
+  action: (...args: [...P, signal: AbortSignal]) => Promise<T>,
 ): IActionResult<P, T> {
   const controllerRef = useRef<AbortController | null>(null)
   const [loading, setLoading] = useState(false)

@@ -23,7 +23,7 @@ describe('useAction', () => {
   })
 
   it('should run callback with params when executing action', async () => {
-    const action = vi.fn<(a: string, signal: AbortSignal) => Promise<string>>().mockResolvedValue('result')
+    const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
     await act(() => result.current[1]('a'))
     expect(action).toHaveBeenCalledWith('a', expect.any(AbortSignal))
