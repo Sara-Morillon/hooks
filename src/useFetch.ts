@@ -6,7 +6,7 @@ export function useFetch<T>(fetch: (signal: AbortSignal) => Promise<T>, defaultV
 export function useFetch<T>(fetch: (signal: AbortSignal) => Promise<T>): IFetchResult<T | undefined>
 export function useFetch<T>(fetch: (signal: AbortSignal) => Promise<T>, defaultValue?: T): IFetchResult<T | undefined> {
   const controllerRef = useRef<AbortController | null>(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<unknown>()
   const [data, setData] = useState(defaultValue)
 
