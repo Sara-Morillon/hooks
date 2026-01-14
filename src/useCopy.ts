@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 export type ICopyStatus = [
   authorized: boolean,
   state: { loading: boolean; error?: unknown },
-  copy: (data: string) => Promise<void>,
+  copy: (data: string | ClipboardItems) => Promise<void>,
 ]
 
 export function useCopy(): ICopyStatus {
@@ -19,12 +19,16 @@ export function useCopy(): ICopyStatus {
     }
   }, [])
 
-  const copy = useCallback(async (data: string) => {
+  const copy = useCallback(async (data: string | ClipboardItems) => {
     setError(undefined)
     setLoading(true)
 
     try {
-      await navigator.clipboard.writeText(data)
+      if (typeof data === 'string') {
+        await navigator.clipboard.writeText(data)
+      } else {
+        await navigator.clipboard.write(data)
+      }
     } catch (error) {
       if (mountedRef.current) {
         setError(error)

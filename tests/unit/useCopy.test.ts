@@ -5,7 +5,7 @@ import { flushPromises } from '../mock.js'
 describe('useCopy', () => {
   beforeAll(() => {
     Object.defineProperty(navigator, 'permissions', { value: { query: vi.fn() }, writable: false })
-    Object.defineProperty(navigator, 'clipboard', { value: { writeText: vi.fn() }, writable: false })
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText: vi.fn(), write: vi.fn() }, writable: false })
   })
 
   beforeEach(() => {
@@ -55,6 +55,13 @@ describe('useCopy', () => {
     await flushPromises()
     await act(() => result.current[2]('data'))
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('data')
+  })
+
+  it('should execute copy withclipboard items ', async () => {
+    const { result } = renderHook(() => useCopy())
+    await flushPromises()
+    await act(() => result.current[2](['data'] as never))
+    expect(navigator.clipboard.write).toHaveBeenCalledWith(['data'])
   })
 
   it('should have error is copying fails', async () => {
