@@ -22,6 +22,13 @@ describe('useCopy', () => {
     await flushPromises()
   })
 
+  it('should be done after copying', async () => {
+    const { result } = renderHook(() => useCopy())
+    await flushPromises()
+    await act(() => result.current[1]('data'))
+    expect(result.current[0].done).toBe(true)
+  })
+
   it('should execute copy', async () => {
     const { result } = renderHook(() => useCopy())
     await flushPromises()

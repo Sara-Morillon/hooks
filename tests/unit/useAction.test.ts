@@ -9,6 +9,12 @@ describe('useAction', () => {
     expect(result.current[0].loading).toBe(false)
   })
 
+  it('should not be done by default', () => {
+    const action = vi.fn().mockResolvedValue('result')
+    const { result } = renderHook(() => useAction(action))
+    expect(result.current[0].done).toBe(false)
+  })
+
   it('should not have error by default', () => {
     const action = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useAction(action))
@@ -35,6 +41,13 @@ describe('useAction', () => {
     act(() => void result.current[1]())
     expect(result.current[0].loading).toBe(true)
     await flushPromises()
+  })
+
+  it('should be done after executing action', async () => {
+    const action = vi.fn().mockResolvedValue('result')
+    const { result } = renderHook(() => useAction(action))
+    await act(() => result.current[1]())
+    expect(result.current[0].done).toBe(true)
   })
 
   it('should return action result', async () => {

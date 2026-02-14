@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 export type IActionResult<P extends unknown[], T> = [
-  state: { loading: boolean; error?: unknown },
+  state: { loading: boolean; error?: unknown; done: boolean },
   execute: (...args: P) => Promise<T | undefined>,
   cancel: () => void,
 ]
@@ -11,6 +11,7 @@ export function useAction<P extends unknown[], T>(
 ): IActionResult<P, T> {
   const controllerRef = useRef<AbortController | null>(null)
   const [loading, setLoading] = useState(false)
+  const [done, setDone] = useState(false)
   const [error, setError] = useState<unknown>()
 
   const execute = useCallback(
@@ -23,10 +24,13 @@ export function useAction<P extends unknown[], T>(
       controllerRef.current = controller
 
       setLoading(true)
+      setDone(false)
       setError(undefined)
+
       try {
         const data = await action(...args, controller.signal)
         if (!controller.signal.aborted) {
+          setDone(true)
           return data
         }
       } catch (error) {
@@ -56,5 +60,5 @@ export function useAction<P extends unknown[], T>(
     }
   }, [])
 
-  return useMemo(() => [{ loading, error }, execute, cancel], [loading, error, execute, cancel])
+  return useMemo(() => [{ loading, done, error }, execute, cancel], [loading, done, error, execute, cancel])
 }

@@ -46,6 +46,13 @@ describe('useFetch', () => {
     await flushPromises()
   })
 
+  it('should be done after fetching data', async () => {
+    const fetch = vi.fn().mockResolvedValue('result')
+    const { result } = renderHook(() => useFetch(fetch))
+    await act(() => result.current[2]())
+    expect(result.current[1].done).toBe(true)
+  })
+
   it('should return data', async () => {
     const fetch = vi.fn().mockResolvedValue('result')
     const { result } = renderHook(() => useFetch(fetch))
