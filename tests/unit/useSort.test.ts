@@ -11,6 +11,7 @@ describe('useSortState', () => {
   it('should return initial sort', () => {
     const { result } = renderHook(() => useSortState<IData>([{ field: 'age', dir: 'desc' }]))
     expect(result.current.state).toEqual([{ field: 'age', dir: 'desc' }])
+    expect(result.current.sortDir).toEqual({ age: 'desc' })
   })
 
   it('should change sort', () => {
@@ -28,6 +29,7 @@ describe('useSortState', () => {
       { field: 'age', dir: 'asc' },
       { field: 'name', dir: 'desc' },
     ])
+    expect(result.current.sortDir).toEqual({ age: 'asc', name: 'desc' })
   })
 
   it('should clear existing sort', () => {
@@ -35,6 +37,7 @@ describe('useSortState', () => {
     act(() => result.current.sort('name', 'asc'))
     act(() => result.current.sort('name'))
     expect(result.current.state).toEqual([])
+    expect(result.current.sortDir).toEqual({})
   })
 })
 
@@ -89,17 +92,20 @@ describe('useSort', () => {
   it('should return empty sort by default', () => {
     const { result } = renderHook(() => useSort(mockTableData()))
     expect(result.current.state).toEqual([])
+    expect(result.current.sortDir).toEqual({})
   })
 
   it('should return initial sort', () => {
     const { result } = renderHook(() => useSort(mockTableData(), [{ field: 'age', dir: 'desc' }]))
     expect(result.current.state).toEqual([{ field: 'age', dir: 'desc' }])
+    expect(result.current.sortDir).toEqual({ age: 'desc' })
   })
 
   it('should change sort', () => {
     const { result } = renderHook(() => useSort(mockTableData()))
     act(() => result.current.sort('name', 'asc'))
     expect(result.current.state).toEqual([{ field: 'name', dir: 'asc' }])
+    expect(result.current.sortDir).toEqual({ name: 'asc' })
   })
 
   it('should override existing sort', () => {
@@ -111,6 +117,7 @@ describe('useSort', () => {
       { field: 'age', dir: 'asc' },
       { field: 'name', dir: 'desc' },
     ])
+    expect(result.current.sortDir).toEqual({ age: 'asc', name: 'desc' })
   })
 
   it('should clear existing sort', () => {
@@ -118,6 +125,7 @@ describe('useSort', () => {
     act(() => result.current.sort('name', 'asc'))
     act(() => result.current.sort('name'))
     expect(result.current.state).toEqual([])
+    expect(result.current.sortDir).toEqual({})
   })
 
   it('should return rows sorted asc', () => {

@@ -632,6 +632,9 @@ exports[`useSort > should sort rows with custom sort function 1`] = `
     },
   ],
   "sort": [Function],
+  "sortDir": {
+    "address": "asc",
+  },
   "state": [
     {
       "dir": "asc",

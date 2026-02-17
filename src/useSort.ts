@@ -12,6 +12,9 @@ export interface ISortItem<T, F extends Unknown<T> = T> {
 
 export interface ISortState<T, F extends Unknown<T> = T> {
   state: ISortItem<T, F>[]
+  sortDir: {
+    [key in keyof F]?: 'asc' | 'desc'
+  }
   sort: (field: keyof F, dir?: 'asc' | 'desc') => void
 }
 
@@ -32,7 +35,17 @@ export function useSortState<T, F extends Unknown<T> = T>(initialSort: ISortItem
     })
   }, [])
 
-  return useMemo(() => ({ state, sort }), [state, sort])
+  const sortDir = useMemo(() => {
+    const sortDir: ISortState<T, F>['sortDir'] = {}
+
+    for (const sort of state) {
+      sortDir[sort.field] = sort.dir
+    }
+
+    return sortDir
+  }, [state])
+
+  return useMemo(() => ({ state, sortDir, sort }), [state, sortDir, sort])
 }
 
 export function useSortedRows<T, F extends Unknown<T> = T>(
@@ -70,8 +83,8 @@ export function useSort<T, F extends Unknown<T> = T>(
   initialSort: ISortItem<T, F>[] = [],
   sortFunctions?: ISortFunctions<T, F>,
 ): ISorted<T, F> {
-  const { state, sort } = useSortState<T, F>(initialSort)
+  const { state, sortDir, sort } = useSortState<T, F>(initialSort)
   const rows = useSortedRows(data, state, sortFunctions)
 
-  return useMemo(() => ({ rows, state, sort }), [rows, state, sort])
+  return useMemo(() => ({ rows, state, sortDir, sort }), [rows, state, sortDir, sort])
 }

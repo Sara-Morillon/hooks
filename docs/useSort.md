@@ -64,4 +64,5 @@ useSort<T>(data: T[], initialSort?: ISortItem<T>[]): ISorted<T>
 
 - `rows: T[]` - the sorted rows.
 - `state: ISortItem<T>[][]` - the sort state, as an ordered list.
+- `sortDir: { [key in keyof T]?: 'asc' | 'desc' }` - the sort state, as an unordered object.
 - `sort: (field: keyof T, dir?: 'asc' | 'desc') => void` - a function to apply a sort to a field.
