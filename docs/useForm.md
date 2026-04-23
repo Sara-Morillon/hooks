@@ -15,13 +15,12 @@ function MyComponent({ data }: { data: Data }) {
   const save = useCallback((values: Data) => {
     console.log(values)
   }, [])
-  const { submit, values, setValue, reset } = useForm(save, data)
+  const { submit, values, setValue } = useForm(save, data)
 
   return (
-    <form onSubmit={submit} onReset={reset}>
+    <form onSubmit={submit}>
       <input value={values.name} onChange={(e) => setValue('name', e.target.value)} />
       <button type='submit'>Submit</button>
-      <button type='reset'>Reset</button>
     </form>
   )
 }
@@ -44,8 +43,8 @@ useForm<T>(props: IFormProps<T>): IForm<T>
 An object containing:
 
 - `values: T` - the form values.
+- `setValues: Dispatch<SetStateAction<T>>` - a function to completely override the form values
 - `setValue: <K extends keyof T>(name: K, value: T[K]) => void` - a function to change the values of the form using a plain value.
 - `updateValue: <K extends keyof T>(name: K, value: Updater<T[K]>) => void` - a function to update the values of the form using an update function.
 - `submit: (e: FormEvent) => void` - a function for submitting a form.
-- `reset: () => void` - a function to reset the form to its initial values.
 - `error?: unknown` - contains a potential error thrown by the save function.

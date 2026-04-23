@@ -37,6 +37,12 @@ describe('useForm', () => {
     expect(save).toHaveBeenCalledWith({ prop: 'value' })
   })
 
+  it('should set form values', () => {
+    const { result } = renderHook(() => useForm(vi.fn(), { prop: 'value' }))
+    act(() => result.current.setValues({ prop: 'value2' }))
+    expect(result.current.values).toEqual({ prop: 'value2' })
+  })
+
   it('should change form values', () => {
     const { result } = renderHook(() => useForm(vi.fn(), { prop: 'value' }))
     act(() => result.current.setValue('prop', 'value2'))
@@ -47,13 +53,6 @@ describe('useForm', () => {
     const { result } = renderHook(() => useForm(vi.fn(), { prop: 'value' }))
     act(() => result.current.updateValue('prop', (current) => `${current}2`))
     expect(result.current.values).toEqual({ prop: 'value2' })
-  })
-
-  it('should reset form', () => {
-    const { result } = renderHook(() => useForm(vi.fn(), { prop: 'value' }))
-    act(() => result.current.setValue('prop', 'value2'))
-    act(() => result.current.reset())
-    expect(result.current.values).toEqual({ prop: 'value' })
   })
 
   it('should set error when submit fails', async () => {

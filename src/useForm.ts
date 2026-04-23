@@ -1,13 +1,13 @@
-import { type FormEvent, useCallback, useMemo, useState } from 'react'
+import { type Dispatch, type FormEvent, type SetStateAction, useCallback, useMemo, useState } from 'react'
 
 export type Updater<T> = (current: T) => T
 
 export interface IForm<T = never> {
   values: T
+  setValues: Dispatch<SetStateAction<T>>
   setValue<K extends keyof T>(name: K, value: T[K]): void
   updateValue<K extends keyof T>(name: K, value: Updater<T[K]>): void
   submit(e?: FormEvent): void
-  reset(): void
   error?: unknown
 }
 
@@ -37,12 +37,8 @@ export function useForm<T = never>(save: (values: T) => void, initialValues: T):
     [save, values],
   )
 
-  const reset = useCallback(() => {
-    setValues(initialValues)
-  }, [initialValues])
-
   return useMemo(
-    () => ({ values, setValue, updateValue, submit, reset, error }),
-    [values, setValue, updateValue, submit, reset, error],
+    () => ({ values, setValues, setValue, updateValue, submit, error }),
+    [values, setValue, updateValue, submit, error],
   )
 }
