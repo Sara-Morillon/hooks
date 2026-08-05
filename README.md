@@ -25,6 +25,7 @@ yarn add @saramorillon/hooks
 - [useForm](docs/useForm.md)
 - [useCopy](docs/useCopy.md)
 - [useDrag/useDrop](docs/useDnd.md)
+- [useDropZone](docs/useDropZone.md)
 - [useDialog](docs/useDialog.md)
 - [useDebounce](docs/useDebounce.md)
 - [useTableState](docs/useTableState.md)

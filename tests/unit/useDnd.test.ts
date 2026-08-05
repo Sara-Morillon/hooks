@@ -5,7 +5,7 @@ import { useDrag, useDrop } from '../../src/useDnd.js'
 function mockDragEvent() {
   return {
     preventDefault: vi.fn(),
-    dataTransfer: { getData: vi.fn().mockReturnValue('dragged'), setData: vi.fn() },
+    dataTransfer: { getData: vi.fn().mockReturnValue('dragged'), setData: vi.fn(), files: [] },
   } as unknown as DragEvent
 }
 
